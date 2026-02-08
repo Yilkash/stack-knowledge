@@ -1,5 +1,8 @@
+```
 import Link from 'next/link';
 import React from 'react';
+
+import ConnectWallet from './ConnectWallet';
 
 export default function NavBar() {
     return (
@@ -12,16 +15,14 @@ export default function NavBar() {
                         </Link>
                     </div>
                     <div className="hidden md:block">
-                        <div className="ml-10 flex items-baseline space-x-8">
+                        <div className="ml-10 flex items-baseline space-x-8 items-center">
                             <Link href="/resources" className="text-zinc-600 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">
                                 Resources
                             </Link>
                             <Link href="/upload" className="text-zinc-600 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">
                                 Upload
                             </Link>
-                            <button className="bg-zinc-900 hover:bg-zinc-800 text-white px-5 py-2.5 rounded-full text-sm font-medium transition-all shadow-lg hover:shadow-xl">
-                                Connect Wallet
-                            </button>
+                            <ConnectWallet />
                         </div>
                     </div>
                 </div>
@@ -29,3 +30,4 @@ export default function NavBar() {
         </nav>
     );
 }
+```
