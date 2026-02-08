@@ -11,14 +11,29 @@ export default function ChatPage() {
     ]);
     const [input, setInput] = useState('');
 
-    const handleSend = () => {
+    const handleSend = async () => {
         if (!input.trim()) return;
-        setMessages(prev => [...prev, { role: 'user', content: input }]);
+
+        const userMessage = { role: 'user' as const, content: input };
+        setMessages((prev: { role: 'user' | 'assistant'; content: string }[]) => [...prev, userMessage]);
         setInput('');
-        // Mock response
-        setTimeout(() => {
-            setMessages(prev => [...prev, { role: 'assistant', content: 'This is a mock response based on the document context.' }]);
-        }, 1000);
+
+        try {
+            const response = await fetch('/api/chat', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    messages: [...messages, userMessage],
+                    documentId: '123' // Mock ID
+                })
+            });
+
+            const data = await response.json();
+            setMessages((prev: { role: 'user' | 'assistant'; content: string }[]) => [...prev, { role: 'assistant', content: data.content }]);
+        } catch (error) {
+            console.error(error);
+            setMessages((prev: { role: 'user' | 'assistant'; content: string }[]) => [...prev, { role: 'assistant', content: 'Sorry, I encountered an error. Please try again.' }]);
+        }
     };
 
     return (
