@@ -11,3 +11,21 @@
 
 ;; Data Variables
 (define-data-var total-resources uint u0)
+
+;; Maps
+(define-map resources
+	{ resource-id: uint }
+	{
+		uploader: principal,
+		title: (string-utf8 100),
+		description: (string-utf8 500),
+		url: (string-utf8 255), ;; Link to Gaia/IPFS
+		total-tips: uint,
+		created-at: uint
+	}
+)
+
+(define-map user-reputation
+	{ user: principal }
+	{ score: uint }
+)
