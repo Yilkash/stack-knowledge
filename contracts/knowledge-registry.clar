@@ -39,6 +39,10 @@
 	(var-get total-resources)
 )
 
+(define-read-only (get-user-reputation (user principal))
+	(default-to u0 (get score (map-get? user-reputation { user: user })))
+)
+
 ;; Public functions
 (define-public (register-resource (title (string-utf8 100)) (description (string-utf8 500)) (url (string-utf8 255)))
 	(let
