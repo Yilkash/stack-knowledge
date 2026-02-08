@@ -60,3 +60,31 @@
 		(ok resource-id)
 	)
 )
+
+(define-public (tip-resource (resource-id uint) (amount uint))
+	(let
+		(
+			(resource (unwrap! (map-get? resources { resource-id: resource-id }) err-not-found))
+			(uploader (get uploader resource))
+			(current-tips (get total-tips resource))
+		)
+		(asserts! (> amount u0) err-invalid-amount)
+		(try! (stx-transfer? amount tx-sender uploader))
+		;; Update resource tips
+		(map-set resources
+			{ resource-id: resource-id }
+			(merge resource { total-tips: (+ current-tips amount) })
+		)
+		;; Update reputation logic (+1 score for getting a tip)
+		(let
+			(
+				(current-score (default-to u0 (get score (map-get? user-reputation { user: uploader }))))
+			)
+			(map-set user-reputation
+				{ user: uploader }
+				{ score: (+ current-score u1) }
+			)
+		)
+		(ok true)
+	)
+)
