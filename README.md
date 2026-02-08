@@ -17,18 +17,18 @@ The platform connects a modern Web2 interface with Web3 incentives and AI logic.
 
 ```mermaid
 graph TD
-    User((👨‍🎓 Student))
+    User(("👨‍🎓 Student"))
     
     subgraph "Frontend Layer (Next.js)"
-        UI[Web Interface]
-        Auth[Stacks Connect Wallet]
-        Chat[AI Chat Interface]
+        UI["Web Interface"]
+        Auth["Stacks Connect Wallet"]
+        Chat["AI Chat Interface"]
     end
 
     subgraph "Smart Contract Layer (Stacks L2)"
-        Registry[knowledge-registry.clar]
-        Reputation[Reputation Score]
-        Tipping[STX Tipping Logic]
+        Registry["knowledge-registry.clar"]
+        Reputation["Reputation Score"]
+        Tipping["STX Tipping Logic"]
     end
 
     subgraph "AI & Storage Layer"
@@ -36,17 +36,17 @@ graph TD
         LLM["AI RAG Engine (OpenAI)"]
     end
 
-    User -->|Connects Wallet| Auth
-    User -->|Uploads PDF| UI
-    UI -->|Stores File| Gaia
-    UI -->|Registers Hash & Metadata| Registry
+    User -->|"Connects Wallet"| Auth
+    User -->|"Uploads PDF"| UI
+    UI -->|"Stores File"| Gaia
+    UI -->|"Registers Hash & Metadata"| Registry
     
-    User -->|Tips Uploader (STX)| Tipping
-    Tipping -->|Updates Score| Reputation
+    User -->|"Tips Uploader (STX)"| Tipping
+    Tipping -->|"Updates Score"| Reputation
     
-    User -->|Asks Question| Chat
-    Chat -->|Retrieves Context| Gaia
-    Chat -->|Generates Answer| LLM
+    User -->|"Asks Question"| Chat
+    Chat -->|"Retrieves Context"| Gaia
+    Chat -->|"Generates Answer"| LLM
 ```
 
 ---
