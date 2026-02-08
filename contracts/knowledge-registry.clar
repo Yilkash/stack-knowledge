@@ -38,3 +38,25 @@
 (define-read-only (get-total-resources)
 	(var-get total-resources)
 )
+
+;; Public functions
+(define-public (register-resource (title (string-utf8 100)) (description (string-utf8 500)) (url (string-utf8 255)))
+	(let
+		(
+			(resource-id (+ (var-get total-resources) u1))
+		)
+		(map-insert resources
+			{ resource-id: resource-id }
+			{
+				uploader: tx-sender,
+				title: title,
+				description: description,
+				url: url,
+				total-tips: u0,
+				created-at: block-height
+			}
+		)
+		(var-set total-resources resource-id)
+		(ok resource-id)
+	)
+)
