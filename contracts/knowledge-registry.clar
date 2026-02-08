@@ -29,3 +29,12 @@
 	{ user: principal }
 	{ score: uint }
 )
+
+;; Read-only functions
+(define-read-only (get-resource (resource-id uint))
+	(map-get? resources { resource-id: resource-id })
+)
+
+(define-read-only (get-total-resources)
+	(var-get total-resources)
+)
