@@ -32,8 +32,8 @@ graph TD
     end
 
     subgraph "AI & Storage Layer"
-        Gaia[Decentralized Storage (Gaia/IPFS)]
-        LLM[AI RAG Engine (OpenAI)]
+        Gaia["Decentralized Storage (Gaia/IPFS)"]
+        LLM["AI RAG Engine (OpenAI)"]
     end
 
     User -->|Connects Wallet| Auth
