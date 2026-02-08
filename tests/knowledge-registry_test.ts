@@ -60,3 +60,31 @@ Clarinet.test({
         reputation.result.expectUint(1);
     },
 });
+
+Clarinet.test({
+    name: "Ensure that users can fetch a resource",
+    async fn(chain: Chain, accounts: Map<string, Account>) {
+        const wallet1 = accounts.get("wallet_1")!;
+
+        // 1. Register resource
+        let block = chain.mineBlock([
+            Tx.contractCall("knowledge-registry", "register-resource", [
+                types.utf8("Intro to CS"),
+                types.utf8("Best CS course"),
+                types.utf8("ipfs://QmHash")
+            ], wallet1.address)
+        ]);
+
+        // 2. Fetch resource
+        let resource = chain.callReadOnlyFn(
+            "knowledge-registry",
+            "get-resource",
+            [types.uint(1)],
+            wallet1.address
+        );
+
+        const resourceTuple = resource.result.expectSome().expectTuple();
+        resourceTuple["title"].expectUtf8("Intro to CS");
+        resourceTuple["uploader"].expectPrincipal(wallet1.address);
+    },
+});
