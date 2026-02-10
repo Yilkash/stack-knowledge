@@ -1,48 +1,75 @@
+'use client';
+
+import { useState, useEffect } from 'react';
 import NavBar from '@/components/NavBar';
 import Footer from '@/components/Footer';
+import SearchBar from '@/components/SearchBar';
 import ResourceCard from '@/components/ResourceCard';
+import Pagination from '@/components/Pagination';
+import LoadingSpinner from '@/components/LoadingSpinner';
 
 export default function ResourcesPage() {
-    return (
-        <main className="min-h-screen bg-zinc-50">
-            <NavBar />
+  const [resources, setResources] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
 
-            <div className="pt-24 pb-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <h1 className="text-3xl font-bold text-zinc-900 mb-8">Latest Resources</h1>
+  const fetchResources = async (query = '', category = '', page = 1) => {
+    setLoading(true);
+    try {
+      const res = await fetch(`/api/resources?query=${query}&category=${category}&page=${page}`);
+      const data = await res.json();
+      setResources(data.resources);
+      setTotalPages(data.totalPages);
+    } catch (error) {
+      console.error('Failed to fetch resources:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {/* Mock Data for now */}
-                    <ResourceCard
-                        id={1}
-                        title="Introduction to Linear Algebra"
-                        description="Comprehensive notes covering matrices, determinants, and vector spaces. Perfect for first-year engineering students."
-                        uploader="SP3...T21"
-                        tips={120}
-                        onTip={() => { }}
-                        onChat={() => { }}
-                    />
-                    <ResourceCard
-                        id={2}
-                        title="Macroeconomics Finals 2023"
-                        description="Past question paper with detailed solutions and examiner comments."
-                        uploader="SP1...A45"
-                        tips={85}
-                        onTip={() => { }}
-                        onChat={() => { }}
-                    />
-                    <ResourceCard
-                        id={3}
-                        title="Organic Chemistry - Reactions"
-                        description="Handwritten cheat sheet for all major reaction mechanisms."
-                        uploader="SP2...B99"
-                        tips={250}
-                        onTip={() => { }}
-                        onChat={() => { }}
-                    />
-                </div>
+  useEffect(() => {
+    fetchResources();
+  }, []);
+
+  return (
+    <main className="min-h-screen bg-zinc-50">
+      <NavBar />
+      
+      <section className="py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h1 className="text-4xl font-bold text-center mb-8">Browse Resources</h1>
+          
+          <div className="mb-12">
+            <SearchBar onSearch={(q, c) => fetchResources(q, c, 1)} />
+          </div>
+
+          {loading ? (
+            <div className="py-20">
+              <LoadingSpinner size="lg" />
             </div>
+          ) : (
+            <>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {resources.map((resource: any) => (
+                  <ResourceCard key={resource.id} {...resource} />
+                ))}
+              </div>
+              
+              <Pagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPageChange={(page) => {
+                  setCurrentPage(page);
+                  fetchResources('', '', page);
+                }}
+              />
+            </>
+          )}
+        </div>
+      </section>
 
-            <Footer />
-        </main>
-    );
+      <Footer />
+    </main>
+  );
 }
