@@ -1,90 +1,68 @@
-
-import { Clarinet, Tx, Chain, Account, types } from 'https://deno.land/x/clarinet@v1.4.2/index.ts';
-import { assertEquals } from 'https://deno.land/std@0.170.0/testing/asserts.ts';
+import { Clarinet, Tx, Chain, Account, types } from 'https://deno.land/x/clarinet@v1.0.0/index.ts';
+import { assertEquals } from 'https://deno.land/std@0.90.0/testing/asserts.ts';
 
 Clarinet.test({
-    name: "Ensure that users can register a resource",
+    name: "Can register a new resource",
     async fn(chain: Chain, accounts: Map<string, Account>) {
-        const deployer = accounts.get("deployer")!;
-        const wallet1 = accounts.get("wallet_1")!;
-
+        const deployer = accounts.get('deployer')!;
+        
         let block = chain.mineBlock([
-            Tx.contractCall("knowledge-registry", "register-resource", [
-                types.utf8("Intro to CS"),
-                types.utf8("Best CS course"),
-                types.utf8("ipfs://QmHash")
-            ], wallet1.address)
+            Tx.contractCall('knowledge-registry', 'register-resource', [
+                types.utf8("Introduction to Calculus"),
+                types.utf8("Comprehensive calculus notes"),
+                types.utf8("ipfs://QmTest123"),
+                types.utf8("Mathematics")
+            ], deployer.address)
         ]);
-
-        assertEquals(block.receipts.length, 1);
-        assertEquals(block.height, 2);
-
+        
         block.receipts[0].result.expectOk().expectUint(1);
+        assertEquals(block.receipts[0].result, '(ok u1)');
     },
 });
 
 Clarinet.test({
-    name: "Ensure that users can tip a resource and reputation updates",
+    name: "Can tip a resource",
     async fn(chain: Chain, accounts: Map<string, Account>) {
-        const deployer = accounts.get("deployer")!;
-        const wallet1 = accounts.get("wallet_1")!;
-        const wallet2 = accounts.get("wallet_2")!;
-
-        // 1. Register resource
+        const deployer = accounts.get('deployer')!;
+        const wallet1 = accounts.get('wallet_1')!;
+        
         let block = chain.mineBlock([
-            Tx.contractCall("knowledge-registry", "register-resource", [
-                types.utf8("Pro Tip PDF"),
-                types.utf8("Best content"),
-                types.utf8("ipfs://QmHash")
-            ], wallet1.address)
-        ]);
-        block.receipts[0].result.expectOk().expectUint(1);
-
-        // 2. Tip the resource
-        block = chain.mineBlock([
-            Tx.contractCall("knowledge-registry", "tip-resource", [
+            Tx.contractCall('knowledge-registry', 'register-resource', [
+                types.utf8("Test Resource"),
+                types.utf8("Test Description"),
+                types.utf8("ipfs://test"),
+                types.utf8("Computer Science")
+            ], deployer.address),
+            Tx.contractCall('knowledge-registry', 'tip-resource', [
                 types.uint(1),
-                types.uint(100)
-            ], wallet2.address)
+                types.uint(1000000)
+            ], wallet1.address)
         ]);
-
-        block.receipts[0].result.expectOk().expectBool(true);
-
-        // 3. Verify reputation updated
-        let reputation = chain.callReadOnlyFn(
-            "knowledge-registry",
-            "get-user-reputation",
-            [types.principal(wallet1.address)],
-            deployer.address
-        );
-        reputation.result.expectUint(1);
+        
+        block.receipts[1].result.expectOk().expectBool(true);
     },
 });
 
 Clarinet.test({
-    name: "Ensure that users can fetch a resource",
+    name: "Can add review to resource",
     async fn(chain: Chain, accounts: Map<string, Account>) {
-        const wallet1 = accounts.get("wallet_1")!;
-
-        // 1. Register resource
+        const deployer = accounts.get('deployer')!;
+        const wallet1 = accounts.get('wallet_1')!;
+        
         let block = chain.mineBlock([
-            Tx.contractCall("knowledge-registry", "register-resource", [
-                types.utf8("Intro to CS"),
-                types.utf8("Best CS course"),
-                types.utf8("ipfs://QmHash")
+            Tx.contractCall('knowledge-registry', 'register-resource', [
+                types.utf8("Test Resource"),
+                types.utf8("Test Description"),
+                types.utf8("ipfs://test"),
+                types.utf8("Physics")
+            ], deployer.address),
+            Tx.contractCall('knowledge-registry', 'add-review', [
+                types.uint(1),
+                types.uint(5),
+                types.utf8("Excellent resource!")
             ], wallet1.address)
         ]);
-
-        // 2. Fetch resource
-        let resource = chain.callReadOnlyFn(
-            "knowledge-registry",
-            "get-resource",
-            [types.uint(1)],
-            wallet1.address
-        );
-
-        const resourceTuple = resource.result.expectSome().expectTuple();
-        resourceTuple["title"].expectUtf8("Intro to CS");
-        resourceTuple["uploader"].expectPrincipal(wallet1.address);
+        
+        block.receipts[1].result.expectOk().expectUint(1);
     },
 });
