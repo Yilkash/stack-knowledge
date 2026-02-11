@@ -5,6 +5,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 import { ModeToggle } from './ModeToggle';
 import ConnectWallet from './ConnectWallet';
+import Container from './Container';
+import Logo from './Logo';
 
 export default function NavBar() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -18,11 +20,11 @@ export default function NavBar() {
 
     return (
         <nav className="fixed w-full z-50 transition-all duration-300 bg-white/80 backdrop-blur-md border-b border-zinc-200 dark:bg-zinc-950/80 dark:border-zinc-800">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <Container>
                 <div className="flex justify-between items-center h-16">
                     <div className="flex-shrink-0">
-                        <Link href="/" className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-violet-600 bg-clip-text text-transparent hover:opacity-80 transition-opacity">
-                            StackKnowledge
+                        <Link href="/" className="hover:opacity-80 transition-opacity">
+                            <Logo />
                         </Link>
                     </div>
 
@@ -56,7 +58,7 @@ export default function NavBar() {
                         </button>
                     </div>
                 </div>
-            </div>
+            </Container>
 
             {/* Mobile Menu Overlay */}
             <AnimatePresence>
@@ -67,21 +69,23 @@ export default function NavBar() {
                         exit={{ opacity: 0, height: 0 }}
                         className="md:hidden bg-white dark:bg-zinc-950 border-b border-zinc-200 dark:border-zinc-800 overflow-hidden"
                     >
-                        <div className="px-4 pt-2 pb-6 space-y-4 shadow-lg">
-                            {navLinks.map((link) => (
-                                <Link
-                                    key={link.href}
-                                    href={link.href}
-                                    onClick={() => setIsMobileMenuOpen(false)}
-                                    className="block px-3 py-3 rounded-md text-base font-medium text-zinc-700 dark:text-zinc-300 hover:text-blue-600 hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-colors"
-                                >
-                                    {link.label}
-                                </Link>
-                            ))}
-                            <div className="px-3 py-2">
-                                <ConnectWallet />
+                        <Container>
+                            <div className="px-4 pt-2 pb-6 space-y-4 shadow-lg">
+                                {navLinks.map((link) => (
+                                    <Link
+                                        key={link.href}
+                                        href={link.href}
+                                        onClick={() => setIsMobileMenuOpen(false)}
+                                        className="block px-3 py-3 rounded-md text-base font-medium text-zinc-700 dark:text-zinc-300 hover:text-blue-600 hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-colors"
+                                    >
+                                        {link.label}
+                                    </Link>
+                                ))}
+                                <div className="px-3 py-2">
+                                    <ConnectWallet />
+                                </div>
                             </div>
-                        </div>
+                        </Container>
                     </motion.div>
                 )}
             </AnimatePresence>
