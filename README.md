@@ -97,6 +97,23 @@ Detailed project documentation is available in the [docs/](./docs) directory:
 
 ---
 
+## 📁 Project Structure
+
+The project is organized into a monorepo for better separation of concerns:
+
+-   **`frontend/`**: The Next.js web application.
+    -   `app/`: App router pages and layouts.
+    -   `components/`: Reusable UI components.
+    -   `hooks/`: Custom React hooks.
+    -   `lib/`: Utilities, constants, and analytics.
+-   **`backend/`**: Stacks smart contracts and blockchain logic.
+    -   `contracts/`: Clarity smart contracts.
+    -   `tests/`: Smart contract unit tests.
+    -   `Clarinet.toml`: Clarinet configuration.
+-   **`docs/`**: Project documentation and architecture details.
+
+---
+
 ## ⚡ Getting Started
 
 ### Prerequisites
@@ -112,9 +129,10 @@ Detailed project documentation is available in the [docs/](./docs) directory:
     cd stack-knowledge
     ```
 
-2.  **Install Frontend Dependencies:**
+2.  **Install All Dependencies:**
     ```bash
     npm install
+    # This installs dependencies for the frontend workspace
     ```
 
 3.  **Run Development Server:**
@@ -125,7 +143,8 @@ Detailed project documentation is available in the [docs/](./docs) directory:
 
 4.  **Run Smart Contract Tests:**
     ```bash
-    clarinet test
+    npm run test:backend
+    # Or manually: cd backend && clarinet test
     ```
 
 ---
