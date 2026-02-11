@@ -1,45 +1,57 @@
-'use client';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+import Button from './Button';
+import { cn } from '@/lib/utils';
 
 interface PaginationProps {
   currentPage: number;
   totalPages: number;
   onPageChange: (page: number) => void;
+  className?: string;
 }
 
-export default function Pagination({ currentPage, totalPages, onPageChange }: PaginationProps) {
+export default function Pagination({ currentPage, totalPages, onPageChange, className }: PaginationProps) {
   const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
-  
+
+  if (totalPages <= 1) return null;
+
   return (
-    <div className="flex justify-center items-center gap-2 mt-8">
-      <button
+    <div className={cn("flex justify-center items-center gap-2 mt-8", className)}>
+      <Button
+        variant="outline"
+        size="sm"
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
-        className="px-4 py-2 rounded-lg border border-zinc-200 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-zinc-50"
+        className="dark:border-zinc-800 dark:text-zinc-300 dark:hover:bg-zinc-900"
       >
-        Previous
-      </button>
-      
-      {pages.map((page) => (
-        <button
-          key={page}
-          onClick={() => onPageChange(page)}
-          className={`px-4 py-2 rounded-lg ${
-            currentPage === page
-              ? 'bg-blue-600 text-white'
-              : 'border border-zinc-200 hover:bg-zinc-50'
-          }`}
-        >
-          {page}
-        </button>
-      ))}
-      
-      <button
+        <ChevronLeft className="w-4 h-4 mr-1" /> Previous
+      </Button>
+
+      <div className="flex gap-1 overflow-x-auto max-w-[200px] md:max-w-none scrollbar-hide">
+        {pages.map((page) => (
+          <Button
+            key={page}
+            variant={currentPage === page ? 'primary' : 'outline'}
+            size="sm"
+            onClick={() => onPageChange(page)}
+            className={cn(
+              "w-9 h-9 p-0",
+              currentPage !== page && "dark:border-zinc-800 dark:text-zinc-300 dark:hover:bg-zinc-900"
+            )}
+          >
+            {page}
+          </Button>
+        ))}
+      </div>
+
+      <Button
+        variant="outline"
+        size="sm"
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
-        className="px-4 py-2 rounded-lg border border-zinc-200 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-zinc-50"
+        className="dark:border-zinc-800 dark:text-zinc-300 dark:hover:bg-zinc-900"
       >
-        Next
-      </button>
+        Next <ChevronRight className="w-4 h-4 ml-1" />
+      </Button>
     </div>
   );
 }
