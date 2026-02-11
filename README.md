@@ -87,6 +87,14 @@ graph TD
 | **Integration** | **Stacks.js** | Wallet connection (`@stacks/connect`) and transaction handling. |
 | **Language** | **TypeScript** | Type-safe development for both frontend and testing. |
 
+## 📖 Documentation
+
+Detailed project documentation is available in the [docs/](./docs) directory:
+- [Architecture](./docs/ARCHITECTURE.md) - Deep dive into system design.
+- [Feature Roadmap](./docs/FEATURE_ROADMAP.md) - Planned and completed features.
+- [Quick Start](./docs/QUICK_START.md) - Extended setup guide.
+- [Contributing](./docs/CONTRIBUTING.md) - Guidelines for developers.
+
 ---
 
 ## ⚡ Getting Started
