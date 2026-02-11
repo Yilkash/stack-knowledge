@@ -1,47 +1,53 @@
-'use client';
-
 import { useState } from 'react';
 import { CATEGORIES } from '@/lib/constants';
+import { cn } from '@/lib/utils';
+import Button from './Button';
+import { Search } from 'lucide-react';
 
 interface SearchBarProps {
   onSearch: (query: string, category: string) => void;
+  className?: string; // Add className
 }
 
-export default function SearchBar({ onSearch }: SearchBarProps) {
+export default function SearchBar({ onSearch, className }: SearchBarProps) {
   const [query, setQuery] = useState('');
   const [category, setCategory] = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onSearch(query, category);
+    onSearch(query, category); // Wait, this function expects 2 args: query, category? Yes.
   };
 
   return (
-    <form onSubmit={handleSubmit} className="w-full max-w-4xl mx-auto">
-      <div className="flex flex-col md:flex-row gap-4">
-        <input
-          type="text"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          placeholder="Search for resources..."
-          className="flex-1 px-6 py-4 rounded-xl border border-zinc-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
-        />
+    <form onSubmit={handleSubmit} className={cn("w-full max-w-4xl mx-auto", className)}>
+      <div className="flex flex-col md:flex-row gap-4 relative">
+        <div className="flex-1 relative">
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-400 h-5 w-5" />
+          <input
+            type="text"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Search for resources..."
+            className="w-full pl-12 pr-6 py-4 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm transition-all"
+          />
+        </div>
         <select
           value={category}
           onChange={(e) => setCategory(e.target.value)}
-          className="px-6 py-4 rounded-xl border border-zinc-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="px-6 py-4 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-blue-500 appearance-none shadow-sm cursor-pointer"
         >
           <option value="">All Categories</option>
           {CATEGORIES.map((cat) => (
             <option key={cat} value={cat}>{cat}</option>
           ))}
         </select>
-        <button
+        <Button
           type="submit"
-          className="px-8 py-4 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-colors font-medium"
+          size="lg"
+          className="rounded-xl px-8 h-auto font-medium"
         >
           Search
-        </button>
+        </Button>
       </div>
     </form>
   );
