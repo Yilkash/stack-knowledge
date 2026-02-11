@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
+import { APP_NAME, APP_DESCRIPTION } from "@/lib/constants";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -13,8 +15,11 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "StackKnowledge - Decentralized Study Platform",
-  description: "Share verified past questions, earn STX, and study with AI support.",
+  title: {
+    default: APP_NAME,
+    template: `%s | ${APP_NAME}`,
+  },
+  description: APP_DESCRIPTION,
 };
 
 import { ThemeProvider } from "@/components/ThemeProvider";
