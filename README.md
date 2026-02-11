@@ -66,6 +66,12 @@ graph TD
 -   **Verified Contributions:** Your contribution history is public and verifiable on the Stacks blockchain.
 -   **Top Contributors:** The contract tracks tip volume and reputation scores.
 
+### 4. 🌓 Dark Mode & Modern UI
+-   **Theme Support:** Full light and dark mode support using `next-themes`.
+-   **Micro-animations:** Smooth transitions and interactions powered by `framer-motion`.
+-   **Responsive Design:** Fully mobile-responsive layout with a custom mobile navigation menu.
+-   **Modern Components:** Standardized UI library using Tailwind CSS and Lucide icons.
+
 ---
 
 ## 🛠️ Technology Stack
@@ -73,8 +79,11 @@ graph TD
 | Component | Tech | Description |
 | :--- | :--- | :--- |
 | **Blockchain** | **Stacks (Clarinet)** | Smart contracts for registry and tipping via `knowledge-registry.clar`. |
-| **Frontend** | **Next.js 15 (App Router)** | React framework with Server Components. |
-| **Styling** | **Tailwind CSS** | Modern utility-first styling with Glassmorphism UI. |
+| **Frontend** | **Next.js 15 (App Router)** | React framework with Server Components and dynamic routing. |
+| **Animation** | **Framer Motion** | High-performance production-ready animations. |
+| **Theming** | **Next Themes** | Efficient dark mode management with system preference detection. |
+| **Styling** | **Tailwind CSS** | Modern utility-first styling with Class-based theme switching. |
+| **Icons** | **Lucide React** | Clean and consistent SVG icon set. |
 | **Integration** | **Stacks.js** | Wallet connection (`@stacks/connect`) and transaction handling. |
 | **Language** | **TypeScript** | Type-safe development for both frontend and testing. |
 
