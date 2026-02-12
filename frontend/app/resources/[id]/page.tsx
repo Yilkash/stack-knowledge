@@ -11,6 +11,10 @@ import Badge from '@/components/Badge';
 import { formatAddress, formatDate, formatSTX } from '@/lib/utils';
 import { Resource, Review } from '@/types';
 
+/**
+ * Resource Detail page providing comprehensive information and AI chat integration.
+ * Displays resource metadata and user reviews.
+ */
 export default function ResourceDetailPage() {
   const params = useParams();
   const resourceId = params?.id as string;
