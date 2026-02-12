@@ -1,5 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+/**
+ * API route for managing resource reviews and ratings.
+ */
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
   const resourceId = searchParams.get('resourceId');
