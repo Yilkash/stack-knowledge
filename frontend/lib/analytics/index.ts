@@ -4,6 +4,9 @@ declare global {
   }
 }
 
+/**
+ * Analytics utility class for tracking user interactions and contract events.
+ */
 export class Analytics {
   private events: Array<{ name: string; data: Record<string, unknown> | undefined; timestamp: number }> = [];
 
