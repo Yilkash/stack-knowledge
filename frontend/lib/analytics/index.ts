@@ -1,7 +1,13 @@
-export class Analytics {
-  private events: Array<{ name: string; data: any; timestamp: number }> = [];
+declare global {
+  interface Window {
+    gtag: (command: string, eventName: string, data?: Record<string, unknown>) => void;
+  }
+}
 
-  track(eventName: string, data?: any) {
+export class Analytics {
+  private events: Array<{ name: string; data: Record<string, unknown> | undefined; timestamp: number }> = [];
+
+  track(eventName: string, data?: Record<string, unknown>) {
     this.events.push({
       name: eventName,
       data,
@@ -9,8 +15,8 @@ export class Analytics {
     });
 
     // Send to analytics service
-    if (typeof window !== 'undefined' && (window as any).gtag) {
-      (window as any).gtag('event', eventName, data);
+    if (typeof window !== 'undefined' && 'gtag' in window && typeof window.gtag === 'function') {
+      window.gtag('event', eventName, data);
     }
   }
 
