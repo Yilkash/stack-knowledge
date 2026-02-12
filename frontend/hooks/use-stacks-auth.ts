@@ -2,6 +2,10 @@ import { useEffect, useState } from 'react';
 import { userSession, authenticate } from '@/lib/stacks';
 import { UserData } from '@stacks/connect';
 
+/**
+ * Custom hook for Stacks wallet authentication.
+ * Provides user data, authentication status, and auth actions.
+ */
 export function useStacksAuth() {
     const [userData, setUserData] = useState<UserData | null>(() =>
         userSession.isUserSignedIn() ? userSession.loadUserData() : null
