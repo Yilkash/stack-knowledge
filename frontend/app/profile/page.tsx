@@ -9,6 +9,10 @@ import ResourceCard from '@/components/ResourceCard';
 import { formatSTX } from '@/lib/utils';
 import { User, Resource } from '@/types';
 
+/**
+ * User Profile page displaying contributions, reputation, and tipping history.
+ * Personalized for the authenticated Stacks user.
+ */
 export default function ProfilePage() {
   const { userData, isSignedIn } = useStacksAuth();
   const [profile, setProfile] = useState<User | null>(null);
@@ -101,7 +105,7 @@ export default function ProfilePage() {
               {userResources.length > 0 ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                   {userResources.map((resource: Resource) => (
-                    <ResourceCard key={resource.id} {...resource} />
+                    <ResourceCard key={resource.id} resource={resource} />
                   ))}
                 </div>
               ) : (
