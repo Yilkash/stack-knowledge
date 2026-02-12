@@ -9,9 +9,10 @@ import Pagination from '@/components/Pagination';
 import ResourceCardSkeleton from '@/components/ResourceCardSkeleton';
 import EmptyState from '@/components/EmptyState';
 import { motion } from 'framer-motion';
+import { Resource } from '@/types';
 
 export default function ResourcesPage() {
-  const [resources, setResources] = useState<any[]>([]);
+  const [resources, setResources] = useState<Resource[]>([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -81,7 +82,7 @@ export default function ResourcesPage() {
                 transition={{ duration: 0.5 }}
                 className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
               >
-                {resources.map((resource: any) => (
+                {resources.map((resource: Resource) => (
                   <ResourceCard key={resource.id || Math.random()} {...resource} />
                 ))}
               </motion.div>
