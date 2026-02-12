@@ -14,6 +14,14 @@ export interface Resource {
   reviewCount?: number;
 }
 
+export interface Leader {
+  rank: number;
+  address: string;
+  reputation: number;
+  totalUploads: number;
+  totalTips: number;
+}
+
 export interface User {
   address: string;
   reputation: number;
