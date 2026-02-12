@@ -1,6 +1,10 @@
 import { cn } from '@/lib/utils';
 import React from 'react';
 
+/**
+ * Reusable Badge component for displaying tags, categories, or status indicators.
+ * Supports multiple style variants including filled and outline.
+ */
 interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
   children: React.ReactNode;
   variant?: 'default' | 'success' | 'warning' | 'error' | 'info' | 'outline';
