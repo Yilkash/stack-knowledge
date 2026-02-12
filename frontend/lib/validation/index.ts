@@ -1,3 +1,6 @@
+/**
+ * Form validation helper for resource data.
+ */
 export function validateResourceInput(data: { title?: string; description?: string; url?: string; category?: string }): { valid: boolean; errors: string[] } {
   const errors: string[] = [];
 
