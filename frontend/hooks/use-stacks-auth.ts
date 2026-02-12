@@ -1,22 +1,21 @@
 import { useEffect, useState } from 'react';
-import { userSession, authenticate, getUserData } from '@/lib/stacks';
+import { userSession, authenticate } from '@/lib/stacks';
 import { UserData } from '@stacks/connect';
 
 export function useStacksAuth() {
-    const [userData, setUserData] = useState<UserData | null>(null);
-    const [isSignedIn, setIsSignedIn] = useState(false);
+    const [userData, setUserData] = useState<UserData | null>(() =>
+        userSession.isUserSignedIn() ? userSession.loadUserData() : null
+    );
+    const [isSignedIn, setIsSignedIn] = useState(() => userSession.isUserSignedIn());
 
     useEffect(() => {
-        if (userSession.isUserSignedIn()) {
-            setUserData(userSession.loadUserData());
-            setIsSignedIn(true);
-        } else if (userSession.isSignInPending()) {
-            userSession.handlePendingSignIn().then((userData) => {
-                setUserData(userData);
+        if (!isSignedIn && userSession.isSignInPending()) {
+            userSession.handlePendingSignIn().then((data: UserData) => {
+                setUserData(data);
                 setIsSignedIn(true);
             });
         }
-    }, []);
+    }, [isSignedIn]);
 
     const signIn = () => {
         authenticate();
