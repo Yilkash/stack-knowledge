@@ -5,16 +5,18 @@ import { useContract } from '@/hooks/use-contract';
 
 interface TipButtonProps {
     resourceId: number;
-    onSuccess?: () => void;
 }
 
-export default function TipButton({ resourceId, onSuccess }: TipButtonProps) {
+/**
+ * TipButton component providing predefined tipping options (1, 5, 10 STX).
+ * Integrates with the useContract hook for blockchain transaction execution.
+ */
+export default function TipButton({ resourceId }: TipButtonProps) {
     const [showOptions, setShowOptions] = useState(false);
     const { tipResource, loading } = useContract();
 
     const handleTip = async (amount: number) => {
         await tipResource(resourceId, amount * 1000000); // STX to microSTX
-        if (onSuccess) onSuccess();
         setShowOptions(false);
     };
 
