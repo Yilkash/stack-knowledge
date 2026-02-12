@@ -29,7 +29,7 @@ export async function POST(request: NextRequest) {
       hash: mockHash,
       url: `ipfs://${mockHash}`
     });
-  } catch (error) {
+  } catch (_error) {
     return NextResponse.json(
       { error: 'Upload failed' },
       { status: 500 }
