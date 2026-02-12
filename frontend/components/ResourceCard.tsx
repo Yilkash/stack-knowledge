@@ -6,7 +6,17 @@ import Link from 'next/link';
 import { formatSTX } from '@/lib/utils';
 import { Resource } from '@/types';
 
-export default function ResourceCard({ id, title, description, uploader, totalTips }: Resource) {
+interface ResourceProps {
+    resource: Resource;
+}
+
+/**
+ * Card component for displaying resource summaries.
+ * Includes interactive elements for tipping and details navigation.
+ */
+export default function ResourceCard({ resource }: ResourceProps) {
+    const { id, title, description, uploader, totalTips } = resource;
+
     return (
         <Card className="flex flex-col p-6 transition-all hover:scale-[1.01] hover:shadow-xl bg-white dark:bg-zinc-900 h-full border-border group">
             <div className="flex justify-between items-start mb-4">
