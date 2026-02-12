@@ -1,6 +1,12 @@
 import { cn } from '@/lib/utils';
 import React from 'react';
 
+/**
+ * Reusable Input component with standardized styling and transition effects.
+ */
+/**
+ * Props for the Input component, extending standard HTML input attributes.
+ */
 export type InputProps = React.InputHTMLAttributes<HTMLInputElement>;
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
