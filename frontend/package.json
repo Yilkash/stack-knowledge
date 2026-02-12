@@ -2,6 +2,7 @@
   "name": "tmp_app",
   "version": "0.1.0",
   "private": true,
+  "description": "StackKnowledge - A decentralized platform for knowledge sharing and academic collaboration on the Stacks blockchain.",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
