@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { openContractCall } from '@stacks/connect';
-import { uintCV, stringUtf8CV, principalCV } from '@stacks/transactions';
+import { uintCV, stringUtf8CV } from '@stacks/transactions';
 import { network } from '@/lib/stacks';
 
 export function useContract() {
@@ -32,8 +32,8 @@ export function useContract() {
           console.log('Transaction:', data.txId);
         },
       });
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : String(err));
     } finally {
       setLoading(false);
     }
@@ -54,8 +54,8 @@ export function useContract() {
           console.log('Tip sent:', data.txId);
         },
       });
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : String(err));
     } finally {
       setLoading(false);
     }
@@ -80,8 +80,8 @@ export function useContract() {
           console.log('Review added:', data.txId);
         },
       });
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : String(err));
     } finally {
       setLoading(false);
     }
