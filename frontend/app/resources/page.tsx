@@ -11,6 +11,10 @@ import EmptyState from '@/components/EmptyState';
 import { motion } from 'framer-motion';
 import { Resource } from '@/types';
 
+/**
+ * Main resources page displaying a searchable list of educational materials.
+ * Supports pagination and category filtering.
+ */
 export default function ResourcesPage() {
   const [resources, setResources] = useState<Resource[]>([]);
   const [loading, setLoading] = useState(true);
