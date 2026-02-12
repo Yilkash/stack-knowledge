@@ -1,3 +1,6 @@
+/**
+ * Simple in-memory cache utility for API requests.
+ */
 const cache = new Map<string, { data: unknown; expiry: number }>();
 
 export function setCache(key: string, data: unknown, ttl: number = 300000) {
