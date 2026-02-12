@@ -5,6 +5,10 @@ import NavBar from '@/components/NavBar';
 import Footer from '@/components/Footer';
 import StatCard from '@/components/StatCard';
 
+/**
+ * Platform Analytics dashboard providing real-time insights into resource distribution,
+ * category popularity, and recent on-chain activity.
+ */
 export default function AnalyticsPage() {
   const [stats, setStats] = useState({
     totalResources: 0,
