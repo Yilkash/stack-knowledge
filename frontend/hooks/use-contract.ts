@@ -3,6 +3,10 @@ import { openContractCall } from '@stacks/connect';
 import { uintCV, stringUtf8CV } from '@stacks/transactions';
 import { network } from '@/lib/stacks';
 
+/**
+ * Custom hook for interacting with the Stacks smart contracts.
+ * Handles transaction signing and execution.
+ */
 export function useContract() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
