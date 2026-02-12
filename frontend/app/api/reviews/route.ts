@@ -27,17 +27,16 @@ export async function GET(request: NextRequest) {
   return NextResponse.json({ reviews: mockReviews });
 }
 
-export async function POST(request: NextRequest) {
+export async function POST(_request: NextRequest) {
   try {
-    const body = await request.json();
-    const { resourceId, rating, comment } = body;
+    // TODO: Submit to blockchain
 
     // TODO: Submit to blockchain
     return NextResponse.json({
       success: true,
       reviewId: '1'
     });
-  } catch (error) {
+  } catch (_error) {
     return NextResponse.json(
       { error: 'Failed to submit review' },
       { status: 500 }
