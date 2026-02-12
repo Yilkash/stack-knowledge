@@ -1,5 +1,8 @@
 import { NextResponse } from 'next/server';
 
+/**
+ * Global middleware for handling security headers and request filtering.
+ */
 export function middleware() {
   const response = NextResponse.next();
 
