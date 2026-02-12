@@ -87,7 +87,7 @@ export default function ResourcesPage() {
                 className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
               >
                 {resources.map((resource: Resource) => (
-                  <ResourceCard key={resource.id || Math.random()} {...resource} />
+                  <ResourceCard key={resource.id} resource={resource} />
                 ))}
               </motion.div>
             ) : (
