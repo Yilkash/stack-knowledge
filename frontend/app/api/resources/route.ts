@@ -2,8 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
-  const query = searchParams.get('query') || '';
-  const category = searchParams.get('category') || '';
+  const category = searchParams.get('category') || 'Mathematics';
   const page = parseInt(searchParams.get('page') || '1');
   const limit = parseInt(searchParams.get('limit') || '12');
 
@@ -13,7 +12,7 @@ export async function GET(request: NextRequest) {
     title: `Resource ${i + 1}`,
     description: 'Sample description',
     uploader: 'ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM',
-    category: category || 'Mathematics',
+    category: category,
     totalTips: 1000000,
     rating: 4.5,
     createdAt: Date.now()
@@ -27,17 +26,16 @@ export async function GET(request: NextRequest) {
   });
 }
 
-export async function POST(request: NextRequest) {
+export async function POST(_request: NextRequest) {
   try {
-    const body = await request.json();
-    const { title, description, url, category } = body;
+    // TODO: Implement actual blockchain transaction
 
     // TODO: Implement actual blockchain transaction
     return NextResponse.json({
       success: true,
       resourceId: 1
     });
-  } catch (error) {
+  } catch (_error) {
     return NextResponse.json(
       { error: 'Failed to create resource' },
       { status: 500 }
