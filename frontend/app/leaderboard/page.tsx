@@ -6,6 +6,10 @@ import Footer from '@/components/Footer';
 import { formatAddress, formatSTX } from '@/lib/utils';
 import { Leader } from '@/types';
 
+/**
+ * Platform Leaderboard showcasing top contributors ranked by reputation, uploads, or tips.
+ * Promotes healthy competition and community engagement.
+ */
 export default function LeaderboardPage() {
   const [leaders, setLeaders] = useState<Leader[]>([]);
   const [sortBy, setSortBy] = useState<'reputation' | 'uploads' | 'tips'>('reputation');
