@@ -1,4 +1,4 @@
-export function validateResourceInput(data: any): { valid: boolean; errors: string[] } {
+export function validateResourceInput(data: { title?: string; description?: string; url?: string; category?: string }): { valid: boolean; errors: string[] } {
   const errors: string[] = [];
 
   if (!data.title || data.title.length < 3 || data.title.length > 100) {
@@ -20,7 +20,7 @@ export function validateResourceInput(data: any): { valid: boolean; errors: stri
   return { valid: errors.length === 0, errors };
 }
 
-export function validateReviewInput(data: any): { valid: boolean; errors: string[] } {
+export function validateReviewInput(data: { rating?: number; comment?: string }): { valid: boolean; errors: string[] } {
   const errors: string[] = [];
 
   if (!data.rating || data.rating < 1 || data.rating > 5) {
