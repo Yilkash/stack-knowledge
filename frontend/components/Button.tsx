@@ -3,14 +3,14 @@ import React from 'react';
 import LoadingSpinner from './LoadingSpinner';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-    variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'destructive';
+    variant?: 'default' | 'primary' | 'secondary' | 'outline' | 'ghost' | 'destructive';
     size?: 'sm' | 'md' | 'lg' | 'icon';
     children?: React.ReactNode;
     isLoading?: boolean;
 }
 
 export default function Button({
-    variant = 'primary',
+    variant = 'default',
     size = 'md',
     className,
     children,
@@ -19,6 +19,7 @@ export default function Button({
     ...props
 }: ButtonProps) {
     const variants = {
+        default: "bg-blue-600 text-white hover:bg-blue-700/90 focus:ring-blue-500 shadow-md hover:shadow-lg transition-all",
         primary: "bg-blue-600 text-white hover:bg-blue-700/90 focus:ring-blue-500 shadow-md hover:shadow-lg transition-all",
         secondary: "bg-zinc-100 text-zinc-900 hover:bg-zinc-200 focus:ring-zinc-500",
         outline: "border border-zinc-200 bg-transparent hover:bg-zinc-50 text-zinc-900 focus:ring-zinc-500",
