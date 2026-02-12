@@ -12,6 +12,10 @@ interface State {
   error?: Error;
 }
 
+/**
+ * Error boundary component to catch and log runtime exceptions in the UI tree.
+ * Prevents the entire application from crashing on component-level errors.
+ */
 export default class ErrorBoundary extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
