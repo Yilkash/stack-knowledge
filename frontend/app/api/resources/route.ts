@@ -1,5 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+/**
+ * API route for fetching and creating educational resources.
+ */
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
   const category = searchParams.get('category') || 'Mathematics';
@@ -26,6 +29,9 @@ export async function GET(request: NextRequest) {
   });
 }
 
+/**
+ * API route for handling file sessions and providing unique hashes.
+ */
 export async function POST(_request: NextRequest) {
   try {
     // TODO: Implement actual blockchain transaction
