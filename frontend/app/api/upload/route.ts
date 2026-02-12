@@ -1,5 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+/**
+ * API route for handling file sessions and providing unique hashes.
+ */
 export async function POST(request: NextRequest) {
   try {
     const formData = await request.formData();
