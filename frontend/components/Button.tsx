@@ -2,6 +2,10 @@ import { cn } from '@/lib/utils';
 import React from 'react';
 import LoadingSpinner from './LoadingSpinner';
 
+/**
+ * Core Button component with modular variants and loading state support.
+ * Follows the project's design system for consistent interactivity.
+ */
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     variant?: 'default' | 'primary' | 'secondary' | 'outline' | 'ghost' | 'destructive';
     size?: 'sm' | 'md' | 'lg' | 'icon';
