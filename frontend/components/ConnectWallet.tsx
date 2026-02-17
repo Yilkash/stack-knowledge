@@ -1,5 +1,7 @@
 'use client';
 
+import { useStacksAuth } from '@/hooks/use-stacks-auth';
+import Button from './Button';
 import { formatAddress } from '@/lib/utils';
 
 /**
