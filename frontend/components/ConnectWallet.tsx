@@ -1,9 +1,11 @@
 'use client';
 
-import React from 'react';
-import { useStacksAuth } from '@/hooks/use-stacks-auth';
-import Button from './Button';
+import { formatAddress } from '@/lib/utils';
 
+/**
+ * Wallet connection component that handles sign-in/sign-out logic.
+ * Displays the user's STX address and a sign-out button when authenticated.
+ */
 export default function ConnectWallet() {
     const { userData, isSignedIn, signIn, signOut } = useStacksAuth();
 
@@ -12,7 +14,7 @@ export default function ConnectWallet() {
         return (
             <div className="flex items-center gap-4">
                 <span className="text-sm font-medium text-zinc-600 dark:text-zinc-400 hidden sm:block">
-                    {address.slice(0, 6)}...{address.slice(-4)}
+                    {formatAddress(address)}
                 </span>
                 <Button
                     variant="outline"
