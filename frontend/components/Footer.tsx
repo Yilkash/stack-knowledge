@@ -1,7 +1,4 @@
-import Link from 'next/link';
-import React from 'react';
-import Container from './Container';
-import Logo from './Logo';
+import { SOCIAL_LINKS, APP_NAME } from '@/lib/constants';
 
 export default function Footer() {
     return (
@@ -10,12 +7,12 @@ export default function Footer() {
                 <div className="flex flex-col md:flex-row justify-between items-center">
                     <div className="mb-4 md:mb-0">
                         <Logo />
-                        <p className="text-sm text-zinc-500 dark:text-zinc-400 mt-2">© 2024 StackKnowledge. All rights reserved.</p>
+                        <p className="text-sm text-zinc-500 dark:text-zinc-400 mt-2">© 2026 {APP_NAME}. All rights reserved.</p>
                     </div>
-                    <div className="flex space-x-6">
-                        <Link href="#" className="text-zinc-500 dark:text-zinc-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Twitter</Link>
-                        <Link href="#" className="text-zinc-500 dark:text-zinc-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">GitHub</Link>
-                        <Link href="#" className="text-zinc-500 dark:text-zinc-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Discord</Link>
+                    <div className="flex space-x-6 text-sm font-medium">
+                        <Link href={SOCIAL_LINKS.twitter} target="_blank" className="text-zinc-500 dark:text-zinc-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Twitter</Link>
+                        <Link href={SOCIAL_LINKS.github} target="_blank" className="text-zinc-500 dark:text-zinc-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">GitHub</Link>
+                        <Link href={SOCIAL_LINKS.discord} target="_blank" className="text-zinc-500 dark:text-zinc-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Discord</Link>
                     </div>
                 </div>
             </Container>
