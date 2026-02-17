@@ -75,3 +75,13 @@ export interface Notification {
   createdAt: number;
   link?: string;
 }
+
+/**
+ * Standardized API response structure.
+ */
+export interface ApiResponse<T = any> {
+  success: boolean;
+  data?: T;
+  error?: string;
+  message?: string;
+}
