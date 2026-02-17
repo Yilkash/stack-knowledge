@@ -1,3 +1,6 @@
+/**
+ * Represents an educational resource uploaded to the platform.
+ */
 export interface Resource {
   id: number;
   uploader: string;
@@ -14,6 +17,9 @@ export interface Resource {
   reviewCount?: number;
 }
 
+/**
+ * Represents a user's performance and ranking on the leaderboard.
+ */
 export interface Leader {
   rank: number;
   address: string;
@@ -22,6 +28,9 @@ export interface Leader {
   totalTips: number;
 }
 
+/**
+ * Represents a user's profile and platform-specific statistics.
+ */
 export interface User {
   address: string;
   reputation: number;
@@ -31,6 +40,9 @@ export interface User {
   joinedAt: number;
 }
 
+/**
+ * Represents a review left by a student on a resource.
+ */
 export interface Review {
   id: string;
   resourceId: number;
@@ -41,6 +53,9 @@ export interface Review {
   helpful: number;
 }
 
+/**
+ * Filter parameters for searching and sorting resources.
+ */
 export interface SearchFilters {
   query?: string;
   category?: string;
@@ -49,6 +64,9 @@ export interface SearchFilters {
   sortBy?: 'recent' | 'popular' | 'tips' | 'rating';
 }
 
+/**
+ * System and user notifications.
+ */
 export interface Notification {
   id: string;
   type: 'tip' | 'review' | 'download' | 'system';
