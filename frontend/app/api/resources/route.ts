@@ -22,10 +22,13 @@ export async function GET(request: NextRequest) {
   }));
 
   return NextResponse.json({
-    resources: mockResources,
-    total: 100,
-    page,
-    totalPages: Math.ceil(100 / limit)
+    success: true,
+    data: {
+      resources: mockResources,
+      total: 100,
+      page,
+      totalPages: Math.ceil(100 / limit)
+    }
   });
 }
 
