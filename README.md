@@ -93,6 +93,12 @@ graph TD
 | **Integration** | **Stacks.js** | Wallet connection (`@stacks/connect`) and transaction handling. |
 | **Language** | **TypeScript** | Type-safe development for both frontend and testing. |
 
+### Technical Highlights
+- **App Router Architecture**: Leveraging Next.js 15's parallel and intercepted routes for a seamless UX.
+- **State Management**: Using custom React hooks for wallet state and document context without overhead.
+- **Smart Contract Security**: Post-conditions implemented for all STX transfers to ensure user safety.
+- **RAG Engine**: Integrated with OpenAI's latest models for highly accurate, document-based responses.
+
 ## 📖 Documentation
 
 Detailed project documentation is available in the [docs/](./docs) directory:
