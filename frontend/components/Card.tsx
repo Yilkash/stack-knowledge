@@ -6,6 +6,12 @@ interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
     className?: string;
 }
 
+/**
+ * Generic Card container component with glassmorphism effects.
+ * Acts as a base for most content sections and interactive elements.
+ * 
+ * @param {CardProps} props - The component props
+ */
 export default function Card({ children, className, ...props }: CardProps) {
     return (
         <div
