@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import React, { useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -7,8 +8,10 @@ import { ModeToggle } from './ModeToggle';
 import ConnectWallet from './ConnectWallet';
 import Container from './Container';
 import Logo from './Logo';
+import { cn } from '@/lib/utils';
 
 export default function NavBar() {
+    const pathname = usePathname();
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
     const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -16,6 +19,7 @@ export default function NavBar() {
     const navLinks = [
         { href: '/resources', label: 'Resources' },
         { href: '/upload', label: 'Upload' },
+        { href: '/profile', label: 'Profile' },
     ];
 
     return (
