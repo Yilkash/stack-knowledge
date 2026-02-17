@@ -9,6 +9,11 @@ interface PaginationProps {
   className?: string;
 }
 
+/**
+ * Reusable Pagination component for navigating through multi-page data sets.
+ * 
+ * @param {PaginationProps} props - The component props
+ */
 export default function Pagination({ currentPage, totalPages, onPageChange, className }: PaginationProps) {
   const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
 
