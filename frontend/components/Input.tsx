@@ -3,9 +3,9 @@ import React from 'react';
 
 /**
  * Reusable Input component with standardized styling and transition effects.
- */
-/**
- * Props for the Input component, extending standard HTML input attributes.
+ * Extends standard HTML input attributes for maximum flexibility.
+ * 
+ * @param {InputProps} props - The component props
  */
 export type InputProps = React.InputHTMLAttributes<HTMLInputElement>;
 
