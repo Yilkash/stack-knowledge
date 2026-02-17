@@ -42,11 +42,15 @@ export async function POST(_request: NextRequest) {
     // TODO: Implement actual blockchain transaction
     return NextResponse.json({
       success: true,
-      resourceId: 1
+      data: { resourceId: 1 }
     });
   } catch (_error) {
     return NextResponse.json(
-      { error: 'Failed to create resource' },
+      {
+        success: false,
+        error: 'Failed to create resource',
+        message: 'An unexpected error occurred during resource registration.'
+      },
       { status: 500 }
     );
   }
