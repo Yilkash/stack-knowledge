@@ -10,6 +10,12 @@ interface SearchBarProps {
   className?: string;
 }
 
+/**
+ * Interactive search bar with live preview capabilities and category filtering.
+ * Uses a debounced query to minimize unnecessary API calls during typing.
+ * 
+ * @param {SearchBarProps} props - The component props
+ */
 export default function SearchBar({ onSearch, className }: SearchBarProps) {
   const [query, setQuery] = useState('');
   const [category, setCategory] = useState('');
