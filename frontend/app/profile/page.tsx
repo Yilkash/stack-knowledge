@@ -29,13 +29,18 @@ export default function ProfilePage() {
       if (!address) return;
 
       const res = await fetch(`/api/user?address=${address}`);
-      const data = await res.json();
-      setProfile(data.user);
+      const result = await res.json();
+
+      if (result.success) {
+        setProfile(result.data);
+      } else {
+        throw new Error(result.error || 'Failed to fetch profile');
+      }
     } catch (error) {
       console.error('Failed to fetch profile:', error);
-      // Mock data for demo
+      // Mock data for demo/fallback
       setProfile({
-        address: userData.profile.stxAddress.testnet,
+        address: userData.profile.stxAddress.testnet || userData.profile.stxAddress.mainnet || 'ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM',
         reputation: 150,
         totalUploads: 5,
         totalTipsReceived: 25000000,
