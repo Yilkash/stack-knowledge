@@ -61,7 +61,7 @@ export interface SearchFilters {
   category?: string;
   tags?: string[];
   minRating?: number;
-  sortBy?: 'recent' | 'popular' | 'tips' | 'rating';
+  sortBy?: 'recent' | 'popular' | 'rating' | 'tips';
 }
 
 /**
