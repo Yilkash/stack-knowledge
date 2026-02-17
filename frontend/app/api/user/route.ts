@@ -6,7 +6,11 @@ export async function GET(request: NextRequest) {
 
   if (!address) {
     return NextResponse.json(
-      { error: 'Address required' },
+      {
+        success: false,
+        error: 'Address required',
+        message: 'A valid Stacks address must be provided as a query parameter.'
+      },
       { status: 400 }
     );
   }
@@ -21,5 +25,8 @@ export async function GET(request: NextRequest) {
     joinedAt: Date.now() - 86400000 * 30
   };
 
-  return NextResponse.json({ user: mockUser });
+  return NextResponse.json({
+    success: true,
+    data: mockUser
+  });
 }
