@@ -12,7 +12,11 @@ Thank you for your interest in contributing! 🎉
 6. Run tests: `npm test`
 7. Commit: `git commit -m "feat: your feature"`
 8. Push: `git push origin feature/your-feature`
-9. Open a Pull Request
+9. Open a Pull Request:
+    - Provide a clear and descriptive title.
+    - Reference any related issues (e.g., `Fixes #123`).
+    - Include screenshots for UI changes.
+    - Ensure CI checks pass before requesting review.
 
 ## Commit Convention
 
