@@ -13,6 +13,22 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     isLoading?: boolean;
 }
 
+const variants = {
+    default: "bg-blue-600 text-white hover:bg-blue-700/90 focus:ring-blue-500 shadow-md hover:shadow-lg transition-all",
+    primary: "bg-blue-600 text-white hover:bg-blue-700/90 focus:ring-blue-500 shadow-md hover:shadow-lg transition-all",
+    secondary: "bg-zinc-100 text-zinc-900 hover:bg-zinc-200 focus:ring-zinc-500",
+    outline: "border border-zinc-200 bg-transparent hover:bg-zinc-50 text-zinc-900 focus:ring-zinc-500",
+    ghost: "bg-transparent hover:bg-zinc-100 text-zinc-700 focus:ring-zinc-500",
+    destructive: "bg-red-500 text-white hover:bg-red-600 focus:ring-red-500",
+};
+
+const sizes = {
+    sm: "h-9 px-3 text-sm rounded-md",
+    md: "h-11 px-6 text-sm rounded-full",
+    lg: "h-12 px-8 text-base rounded-full",
+    icon: "h-10 w-10 p-0 rounded-full",
+};
+
 export default function Button({
     variant = 'default',
     size = 'md',
@@ -22,21 +38,6 @@ export default function Button({
     disabled,
     ...props
 }: ButtonProps) {
-    const variants = {
-        default: "bg-blue-600 text-white hover:bg-blue-700/90 focus:ring-blue-500 shadow-md hover:shadow-lg transition-all",
-        primary: "bg-blue-600 text-white hover:bg-blue-700/90 focus:ring-blue-500 shadow-md hover:shadow-lg transition-all",
-        secondary: "bg-zinc-100 text-zinc-900 hover:bg-zinc-200 focus:ring-zinc-500",
-        outline: "border border-zinc-200 bg-transparent hover:bg-zinc-50 text-zinc-900 focus:ring-zinc-500",
-        ghost: "bg-transparent hover:bg-zinc-100 text-zinc-700 focus:ring-zinc-500",
-        destructive: "bg-red-500 text-white hover:bg-red-600 focus:ring-red-500",
-    };
-
-    const sizes = {
-        sm: "h-9 px-3 text-sm rounded-md",
-        md: "h-11 px-6 text-sm rounded-full",
-        lg: "h-12 px-8 text-base rounded-full",
-        icon: "h-10 w-10 p-0 rounded-full",
-    };
 
     return (
         <button
