@@ -16,15 +16,19 @@ export class Analytics {
    * @param data - Optional key-value pairs of metadata
    */
   track(eventName: string, data?: Record<string, unknown>) {
-    this.events.push({
-      name: eventName,
-      data,
-      timestamp: Date.now()
-    });
+    try {
+      this.events.push({
+        name: eventName,
+        data,
+        timestamp: Date.now()
+      });
 
-    // Send to analytics service
-    if (typeof window !== 'undefined' && 'gtag' in window && typeof window.gtag === 'function') {
-      window.gtag('event', eventName, data);
+      // Send to analytics service
+      if (typeof window !== 'undefined' && 'gtag' in window && typeof window.gtag === 'function') {
+        window.gtag('event', eventName, data);
+      }
+    } catch (error) {
+      console.error('Analytics Error:', error);
     }
   }
 
