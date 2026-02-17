@@ -39,7 +39,12 @@ export default function NavBar() {
                                 <Link
                                     key={link.href}
                                     href={link.href}
-                                    className="text-zinc-600 dark:text-zinc-400 hover:text-blue-600 dark:hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium transition-colors"
+                                    className={cn(
+                                        "px-3 py-2 rounded-md text-sm font-medium transition-colors",
+                                        pathname === link.href
+                                            ? "text-blue-600 dark:text-blue-400 bg-blue-50/50 dark:bg-blue-900/20"
+                                            : "text-zinc-600 dark:text-zinc-400 hover:text-blue-600 dark:hover:text-blue-400"
+                                    )}
                                 >
                                     {link.label}
                                 </Link>
