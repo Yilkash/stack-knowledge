@@ -4,7 +4,12 @@ import { UserData } from '@stacks/connect';
 
 /**
  * Custom hook for Stacks wallet authentication.
- * Provides user data, authentication status, and auth actions.
+ * 
+ * @returns {Object} Authentication state and methods
+ * @property {UserData | null} userData - The user's profile and session data
+ * @property {boolean} isSignedIn - Current authentication status
+ * @property {Function} signIn - Function to initiate Stacks wallet authentication
+ * @property {Function} signOut - Function to sign the user out of the session
  */
 export function useStacksAuth() {
     const [userData, setUserData] = useState<UserData | null>(() =>
