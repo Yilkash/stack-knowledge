@@ -11,12 +11,19 @@ export async function POST(req: Request) {
         const mockResponse = `[AI Analysis of Document ${documentId}]: You asked "${lastMessage.content}". Based on the provided PDF, the answer is... (This is a mock response from the API).`;
 
         return NextResponse.json({
-            role: 'assistant',
-            content: mockResponse
+            success: true,
+            data: {
+                role: 'assistant',
+                content: mockResponse
+            }
         });
 
     } catch (error) {
         console.error('Chat API Error:', error);
-        return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+        return NextResponse.json({
+            success: false,
+            error: 'Internal Server Error',
+            message: 'The AI Study Buddy is currently unavailable. Please try again later.'
+        }, { status: 500 });
     }
 }
