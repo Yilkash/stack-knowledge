@@ -13,6 +13,9 @@ interface ResourceProps {
 /**
  * Card component for displaying resource summaries.
  * Includes interactive elements for tipping and details navigation.
+ * 
+ * @param {Object} props - Component props
+ * @param {Resource} props.resource - The resource data to display
  */
 export default function ResourceCard({ resource }: ResourceProps) {
     const { id, title, description, uploader, totalTips } = resource;
