@@ -85,7 +85,12 @@ export default function NavBar() {
                                         key={link.href}
                                         href={link.href}
                                         onClick={() => setIsMobileMenuOpen(false)}
-                                        className="block px-3 py-3 rounded-md text-base font-medium text-zinc-700 dark:text-zinc-300 hover:text-blue-600 hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-colors"
+                                        className={cn(
+                                            "block px-3 py-3 rounded-md text-base font-medium transition-colors",
+                                            pathname === link.href
+                                                ? "text-blue-600 dark:text-blue-400 bg-blue-50/50 dark:bg-blue-900/20"
+                                                : "text-zinc-700 dark:text-zinc-300 hover:text-blue-600 hover:bg-zinc-50 dark:hover:bg-zinc-900"
+                                        )}
                                     >
                                         {link.label}
                                     </Link>
