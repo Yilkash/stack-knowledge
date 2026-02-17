@@ -9,7 +9,11 @@ export async function GET(request: NextRequest) {
 
   if (!resourceId) {
     return NextResponse.json(
-      { error: 'Resource ID required' },
+      {
+        success: false,
+        error: 'Resource ID required',
+        message: 'A valid resourceId must be provided as a query parameter.'
+      },
       { status: 400 }
     );
   }
@@ -27,21 +31,27 @@ export async function GET(request: NextRequest) {
     }
   ];
 
-  return NextResponse.json({ reviews: mockReviews });
+  return NextResponse.json({
+    success: true,
+    data: mockReviews
+  });
 }
 
 export async function POST(_request: NextRequest) {
   try {
     // TODO: Submit to blockchain
 
-    // TODO: Submit to blockchain
     return NextResponse.json({
       success: true,
-      reviewId: '1'
+      data: { reviewId: '1' }
     });
   } catch (_error) {
     return NextResponse.json(
-      { error: 'Failed to submit review' },
+      {
+        success: false,
+        error: 'Failed to submit review',
+        message: 'An error occurred while attempting to save your review.'
+      },
       { status: 500 }
     );
   }
