@@ -1,6 +1,4 @@
-import Link from 'next/link';
-import React from 'react';
-import { motion } from 'framer-motion';
+import { APP_DESCRIPTION } from '@/lib/constants';
 
 export default function Hero() {
     return (
@@ -26,7 +24,7 @@ export default function Hero() {
                     transition={{ duration: 0.5, delay: 0.2 }}
                     className="mt-4 text-xl text-muted-foreground dark:text-zinc-400 max-w-2xl mx-auto mb-10"
                 >
-                    Access verified past questions and handouts. Ask our AI study buddy questions strictly based on your course materials.
+                    {APP_DESCRIPTION}. Access verified past questions and handouts, and chat with our AI Study Buddy.
                 </motion.p>
 
                 <motion.div
