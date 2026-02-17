@@ -61,6 +61,8 @@
 )
 
 ;; Read-only functions
+
+;; Get metadata for a specific resource
 (define-read-only (get-resource (resource-id uint))
 	(map-get? resources { resource-id: resource-id })
 )
@@ -69,6 +71,7 @@
 	(var-get total-resources)
 )
 
+;; Get user stats and reputation score
 (define-read-only (get-user-reputation (user principal))
 	(default-to 
 		{ score: u0, total-uploads: u0, total-tips-received: u0, total-tips-given: u0 }
@@ -86,6 +89,7 @@
 	)
 )
 
+;; Calculate average rating for a resource
 (define-read-only (get-resource-rating (resource-id uint))
 	(let
 		(
@@ -101,6 +105,8 @@
 )
 
 ;; Public functions
+
+;; Register a new educational resource
 (define-public (register-resource 
 	(title (string-utf8 100)) 
 	(description (string-utf8 500)) 
