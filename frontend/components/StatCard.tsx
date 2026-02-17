@@ -12,6 +12,12 @@ interface StatCardProps {
   className?: string;
 }
 
+/**
+ * Component for displaying key metrics and statistics.
+ * Includes support for icons and trend indicators (positive/negative).
+ * 
+ * @param {StatCardProps} props - The component props
+ */
 export default function StatCard({ label, value, icon, trend, className }: StatCardProps) {
   return (
     <div className={cn(
