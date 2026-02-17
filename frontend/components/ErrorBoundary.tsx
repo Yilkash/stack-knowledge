@@ -40,12 +40,21 @@ export default class ErrorBoundary extends Component<Props, State> {
             </div>
             <h2 className="text-2xl font-bold text-zinc-900 dark:text-zinc-100 mb-2">Something went wrong</h2>
             <p className="text-zinc-600 dark:text-zinc-400 mb-8">{this.state.error?.message || "An unexpected error occurred."}</p>
-            <Button
-              onClick={() => window.location.reload()}
-              className="w-full"
-            >
-              Reload Page
-            </Button>
+            <div className="flex flex-col gap-3">
+              <Button
+                onClick={() => this.setState({ hasError: false })}
+                className="w-full"
+              >
+                Try Again
+              </Button>
+              <Button
+                variant="outline"
+                onClick={() => window.location.reload()}
+                className="w-full"
+              >
+                Reload Page
+              </Button>
+            </div>
           </div>
         </div>
       );
