@@ -10,7 +10,11 @@ export async function POST(request: NextRequest) {
 
     if (!file) {
       return NextResponse.json(
-        { error: 'No file provided' },
+        {
+          success: false,
+          error: 'No file provided',
+          message: 'Please select a file to upload.'
+        },
         { status: 400 }
       );
     }
@@ -19,7 +23,11 @@ export async function POST(request: NextRequest) {
     const maxSize = 10 * 1024 * 1024; // 10MB
     if (file.size > maxSize) {
       return NextResponse.json(
-        { error: 'File too large' },
+        {
+          success: false,
+          error: 'File too large',
+          message: 'The selected file exceeds the 10MB size limit.'
+        },
         { status: 400 }
       );
     }
@@ -29,12 +37,18 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({
       success: true,
-      hash: mockHash,
-      url: `ipfs://${mockHash}`
+      data: {
+        hash: mockHash,
+        url: `ipfs://${mockHash}`
+      }
     });
   } catch (_error) {
     return NextResponse.json(
-      { error: 'Upload failed' },
+      {
+        success: false,
+        error: 'Upload failed',
+        message: 'An unexpected error occurred during the file upload process.'
+      },
       { status: 500 }
     );
   }
