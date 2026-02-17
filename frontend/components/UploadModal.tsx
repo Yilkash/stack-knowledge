@@ -9,6 +9,12 @@ interface UploadModalProps {
     onClose: () => void;
 }
 
+/**
+ * Modal component for uploading new educational resources.
+ * Features drag-and-drop support and fields for title and description.
+ * 
+ * @param {UploadModalProps} props - The component props
+ */
 export default function UploadModal({ isOpen, onClose }: UploadModalProps) {
     const [dragActive, setDragActive] = useState(false);
 
