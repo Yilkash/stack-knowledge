@@ -12,6 +12,11 @@ interface ReviewCardProps {
   className?: string;
 }
 
+/**
+ * Component for displaying a user review with rating, comment, and helpfulness count.
+ * 
+ * @param {ReviewCardProps} props - The component props
+ */
 export default function ReviewCard({ reviewer, rating, comment, createdAt, helpful = 0, className }: ReviewCardProps) {
   return (
     <div className={cn(
