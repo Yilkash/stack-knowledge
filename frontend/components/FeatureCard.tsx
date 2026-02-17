@@ -8,6 +8,12 @@ interface FeatureCardProps {
     className?: string;
 }
 
+/**
+ * Component for displaying key platform features with an icon.
+ * Used primarily on the home page hero section.
+ * 
+ * @param {FeatureCardProps} props - The component props
+ */
 export default function FeatureCard({ title, description, icon, className }: FeatureCardProps) {
     return (
         <div className={cn(
