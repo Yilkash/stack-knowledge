@@ -9,6 +9,12 @@ interface ToastProps {
   duration?: number;
 }
 
+/**
+ * Notification toast component for providing user feedback.
+ * Supports different types (success, error, info) and auto-dismisses after a duration.
+ * 
+ * @param {ToastProps} props - The component props
+ */
 export default function Toast({ message, type = 'info', onClose, duration = 3000 }: ToastProps) {
   useEffect(() => {
     const timer = setTimeout(onClose, duration);
