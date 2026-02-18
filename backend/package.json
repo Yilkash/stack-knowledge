@@ -1,0 +1,14 @@
+{
+    "name": "stack-knowledge-backend",
+    "version": "1.0.0",
+    "description": "Deployment scripts for StackKnowledge smart contracts",
+    "main": "scripts/deploy.js",
+    "scripts": {
+        "deploy": "node scripts/deploy.js"
+    },
+    "dependencies": {
+        "@stacks/network": "^7.3.1",
+        "@stacks/transactions": "^7.3.1",
+        "dotenv": "^16.4.5"
+    }
+}
