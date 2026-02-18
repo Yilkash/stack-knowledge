@@ -1,10 +1,12 @@
+"use client";
+
+import { ReactNode } from 'react';
 import { cn } from '@/lib/utils';
-import React from 'react';
 
 interface StatCardProps {
   label: string;
   value: string | number;
-  icon?: React.ReactNode;
+  icon?: ReactNode;
   trend?: {
     value: number;
     isPositive: boolean;
