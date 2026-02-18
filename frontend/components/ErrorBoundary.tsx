@@ -1,3 +1,5 @@
+"use client";
+
 import { Component, ReactNode } from 'react';
 import { AlertTriangle } from 'lucide-react';
 import Button from './Button';
