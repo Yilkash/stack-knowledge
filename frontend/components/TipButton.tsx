@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Button from './Button';
 import { useContract } from '@/hooks/use-contract';
 
