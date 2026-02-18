@@ -130,7 +130,7 @@
 				download-count: u0,
 				rating-sum: u0,
 				rating-count: u0,
-				created-at: block-height,
+				created-at: burn-block-height,
 				is-active: true
 			}
 		)
@@ -209,7 +209,7 @@
 				reviewer: tx-sender,
 				rating: rating,
 				comment: comment,
-				created-at: block-height
+				created-at: burn-block-height
 			}
 		)
 		
