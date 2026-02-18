@@ -7,7 +7,7 @@ export function rateLimitMiddleware(
   limit: number = 10,
   windowMs: number = 60000
 ) {
-  const ip = request.ip || 'unknown';
+  const ip = request.headers.get('x-forwarded-for')?.split(',')[0] || 'unknown';
   const now = Date.now();
   const record = rateLimit.get(ip);
 
