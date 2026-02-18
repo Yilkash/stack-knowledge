@@ -1,5 +1,7 @@
 'use client';
 
+export const dynamic = 'force-dynamic';
+
 import { useState, useEffect, useCallback } from 'react';
 import NavBar from '@/components/NavBar';
 import Footer from '@/components/Footer';
