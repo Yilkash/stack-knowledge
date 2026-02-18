@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import React from 'react';
 import Container from './Container';
 import Logo from './Logo';
 import { SOCIAL_LINKS, APP_NAME } from '@/lib/constants';
