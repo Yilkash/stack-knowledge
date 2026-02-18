@@ -184,4 +184,14 @@ Contributions are welcome! Please fork the repository and submit a Pull Request.
 
 ---
 
-*Verified on Stacks Testnet* 🟣
+---
+
+## 🔗 Mainnet Deployment
+The project is officially deployed on the **Stacks Mainnet**.
+
+- **Contract Address:** `SPMY0KQSPCPP4PBDY6ZDZ315C7P1SQKGMDZETJ7M.knowledge-registry`
+- **Explorer:** [View on Stacks Explorer](https://explorer.hiro.so/txid/0x9bc098a4e2da6f202570917b36fcc2d789ca742af5d9f34967554ab72bd68c00?chain=mainnet)
+
+---
+
+*Verified on Stacks Mainnet* 🟣
