@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import NavBar from '@/components/NavBar';
 import Card from '@/components/Card';
 import Button from '@/components/Button';
