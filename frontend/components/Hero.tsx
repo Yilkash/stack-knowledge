@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import React from 'react';
 import { motion } from 'framer-motion';
 import { APP_DESCRIPTION } from '@/lib/constants';
 
