@@ -1,5 +1,4 @@
 import { cn } from '@/lib/utils';
-import React from 'react';
 
 /**
  * Reusable Badge component for displaying tags, categories, or status indicators.
