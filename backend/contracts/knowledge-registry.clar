@@ -110,6 +110,11 @@
 	{ last-viewed: uint, view-count: uint }
 )
 
+(define-map reputation-levels
+	{ user: principal }
+	{ level: uint, badge: (string-utf8 20) }
+)
+
 ;; Read-only functions
 
 ;; Get metadata for a specific resource
