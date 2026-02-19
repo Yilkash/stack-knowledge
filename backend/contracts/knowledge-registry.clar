@@ -60,6 +60,11 @@
 	{ has-reviewed: bool }
 )
 
+(define-map resource-tags
+	{ resource-id: uint }
+	{ tags: (list 10 (string-utf8 20)) }
+)
+
 ;; Read-only functions
 
 ;; Get metadata for a specific resource
