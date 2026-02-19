@@ -113,6 +113,10 @@
 	(map-get? resource-tags { resource-id: resource-id })
 )
 
+(define-read-only (is-resource-featured (resource-id uint))
+	(default-to false (get is-featured (map-get? featured-resources { resource-id: resource-id })))
+)
+
 ;; Calculate average rating for a resource
 (define-read-only (get-resource-rating (resource-id uint))
 	(let
