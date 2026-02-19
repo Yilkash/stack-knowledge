@@ -70,6 +70,11 @@
 	{ is-featured: bool, featured-at: uint }
 )
 
+(define-map reported-resources
+	{ resource-id: uint, reporter: principal }
+	{ reason: (string-utf8 100), created-at: uint }
+)
+
 ;; Read-only functions
 
 ;; Get metadata for a specific resource
