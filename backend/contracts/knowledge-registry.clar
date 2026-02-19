@@ -85,6 +85,11 @@
 	{ is-archived: bool }
 )
 
+(define-map contract-owners
+	{ owner: principal }
+	{ is-owner: bool }
+)
+
 ;; Read-only functions
 
 ;; Get metadata for a specific resource
