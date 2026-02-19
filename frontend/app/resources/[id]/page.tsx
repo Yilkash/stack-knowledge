@@ -87,109 +87,130 @@ export default function ResourceDetailPage() {
   );
 
   return (
-    <main className="min-h-screen bg-zinc-50 dark:bg-zinc-950/50">
+  return (
+    <main className="min-h-screen bg-background text-foreground">
       <NavBar />
 
-      <section className="py-32">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-white dark:bg-zinc-900 rounded-2xl p-8 shadow-sm border border-zinc-200 dark:border-zinc-800 mb-8 overflow-hidden relative">
-            <div className="flex flex-col md:flex-row md:items-start justify-between gap-6 mb-8">
+      <section className="py-40">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="glass rounded-[40px] p-12 lg:p-16 border border-white/5 shadow-2xl mb-12 relative overflow-hidden group"
+          >
+            <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-primary via-primary-400 to-primary-600"></div>
+
+            <div className="flex flex-col lg:flex-row justify-between gap-12 mb-12">
               <div className="flex-1">
-                <div className="flex items-center gap-2 mb-4">
-                  <Badge variant="outline">{resource.category}</Badge>
-                  <span className="text-sm text-zinc-400 font-medium">•</span>
-                  <span className="text-sm text-zinc-500 dark:text-zinc-400">
-                    Uploaded {formatDate(resource.createdAt)}
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="px-5 py-2 bg-primary/20 text-primary rounded-full text-xs font-black uppercase tracking-widest border border-primary/20">
+                    {resource.category}
+                  </div>
+                  <span className="text-sm text-muted-foreground font-bold uppercase tracking-tighter">
+                    UPLOADED {formatDate(resource.createdAt)}
                   </span>
                 </div>
-                <h1 className="text-4xl font-bold text-zinc-900 dark:text-zinc-100 mb-4 tracking-tight">{resource.title}</h1>
-                <p className="text-zinc-600 dark:text-zinc-400 text-lg leading-relaxed">{resource.description}</p>
+                <h1 className="text-5xl md:text-7xl font-black text-foreground mb-8 tracking-tighter leading-tight uppercase group-hover:text-primary transition-colors">
+                  {resource.title}
+                </h1>
+                <p className="text-muted-foreground text-xl leading-relaxed font-medium italic mb-10 max-w-2xl">{resource.description}</p>
+
+                <div className="flex flex-wrap items-center gap-8">
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary font-bold">
+                      {resource.uploader.substring(2, 4).toUpperCase()}
+                    </div>
+                    <div>
+                      <p className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">CONTRIBUTOR</p>
+                      <p className="text-sm font-bold font-mono">{formatAddress(resource.uploader)}</p>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div className="flex-shrink-0">
+
+              <div className="flex flex-col gap-4 min-w-[280px]">
                 <TipButton resourceId={resource.id} />
+                <button className="w-full px-10 py-5 bg-foreground text-background rounded-[20px] hover:scale-105 transition-all font-black text-lg shadow-2xl flex items-center justify-center gap-3">
+                  <span>DOWNLOAD</span>
+                  <div className="w-2 h-2 bg-primary rounded-full animate-ping"></div>
+                </button>
               </div>
             </div>
 
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 py-8 border-y border-zinc-100 dark:border-zinc-800">
-              <div className="space-y-1">
-                <p className="text-xs font-semibold text-zinc-400 uppercase tracking-wider">Total Tips</p>
-                <p className="text-2xl font-bold text-zinc-900 dark:text-zinc-100 font-mono">{formatSTX(resource.totalTips)} STX</p>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 py-12 border-y border-white/5">
+              <div className="space-y-2">
+                <p className="text-[10px] font-black text-muted-foreground uppercase tracking-widest">TOTAL EARNINGS</p>
+                <p className="text-3xl font-black text-primary font-mono">{formatSTX(resource.totalTips)} STX</p>
               </div>
-              <div className="space-y-1">
-                <p className="text-xs font-semibold text-zinc-400 uppercase tracking-wider">Rating</p>
-                <div className="flex items-center gap-2">
-                  <p className="text-2xl font-bold text-zinc-900 dark:text-zinc-100">{resource.rating}</p>
+              <div className="space-y-2 border-l border-white/5 pl-8">
+                <p className="text-[10px] font-black text-muted-foreground uppercase tracking-widest">TRUST RATING</p>
+                <div className="flex items-center gap-3">
+                  <p className="text-3xl font-black text-foreground">{resource.rating}</p>
                   <Rating value={resource.rating || 0} readonly size="sm" />
                 </div>
               </div>
-              <div className="space-y-1">
-                <p className="text-xs font-semibold text-zinc-400 uppercase tracking-wider">Reviews</p>
-                <p className="text-2xl font-bold text-zinc-900 dark:text-zinc-100">{resource.reviewCount}</p>
+              <div className="space-y-2 border-l border-white/5 pl-8">
+                <p className="text-[10px] font-black text-muted-foreground uppercase tracking-widest">TESTIMONIALS</p>
+                <p className="text-3xl font-black text-foreground">{resource.reviewCount}</p>
               </div>
-              <div className="space-y-1">
-                <p className="text-xs font-semibold text-zinc-400 uppercase tracking-wider">Downloads</p>
-                <p className="text-2xl font-bold text-zinc-900 dark:text-zinc-100">{resource.downloads}</p>
+              <div className="space-y-2 border-l border-white/5 pl-8">
+                <p className="text-[10px] font-black text-muted-foreground uppercase tracking-widest">UTILIZATIONS</p>
+                <p className="text-3xl font-black text-foreground">{resource.downloads}</p>
+              </div>
+            </div>
+          </motion.div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
+            <div className="lg:col-span-3 space-y-12">
+              <div className="glass rounded-[32px] p-10 border border-white/5">
+                <h2 className="text-3xl font-black uppercase tracking-tighter mb-8 flex items-center gap-4">
+                  <div className="w-2 h-8 bg-primary rounded-full"></div>
+                  Community Feedback
+                </h2>
+                {reviews.length > 0 ? (
+                  <div className="space-y-8">
+                    {reviews.map((review: Review) => (
+                      <ReviewCard key={review.id} {...review} />
+                    ))}
+                  </div>
+                ) : (
+                  <div className="text-center py-20 border-2 border-dashed border-white/5 rounded-3xl bg-white/[0.01]">
+                    <p className="text-muted-foreground font-medium italic text-lg">No reviews yet. Be the first to share your experience!</p>
+                  </div>
+                )}
               </div>
             </div>
 
-            <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center text-zinc-400">
-                  {resource.uploader.substring(0, 2)}
+            <div className="lg:col-span-2">
+              <div className="glass rounded-[32px] p-10 border border-white/5 sticky top-32">
+                <h2 className="text-2xl font-black uppercase tracking-tighter mb-8">Share Feedback</h2>
+                <div className="space-y-8">
+                  <div>
+                    <label className="block text-[10px] font-black text-muted-foreground mb-4 uppercase tracking-widest">Rating Scale</label>
+                    <Rating
+                      value={newReview.rating}
+                      onChange={(rating) => setNewReview({ ...newReview, rating })}
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[10px] font-black text-muted-foreground mb-4 uppercase tracking-widest">Detailed Commentary</label>
+                    <textarea
+                      value={newReview.comment}
+                      onChange={(e) => setNewReview({ ...newReview, comment: e.target.value })}
+                      className="w-full px-6 py-5 bg-white/5 border border-white/10 rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary transition-all text-foreground placeholder:text-muted-foreground/50 font-medium italic"
+                      rows={5}
+                      placeholder="Was this resource helpful? share your thoughts..."
+                    />
+                  </div>
+                  <button
+                    onClick={handleSubmitReview}
+                    className="w-full py-5 bg-primary text-primary-foreground rounded-2xl hover:scale-[1.02] transition-all font-black text-lg shadow-xl shadow-primary/20 uppercase tracking-widest"
+                  >
+                    POST TESTIMONIAL
+                  </button>
                 </div>
-                <div>
-                  <p className="text-xs text-zinc-400 font-medium">Uploader</p>
-                  <p className="text-sm font-semibold text-zinc-900 dark:text-zinc-100">{formatAddress(resource.uploader)}</p>
-                </div>
               </div>
-              <button className="w-full sm:w-auto px-8 py-4 bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 rounded-xl hover:opacity-90 transition-opacity font-bold text-lg shadow-lg shadow-zinc-200 dark:shadow-none">
-                Download Resource
-              </button>
             </div>
-          </div>
-
-          <div className="bg-white dark:bg-zinc-900 rounded-2xl p-8 shadow-sm border border-zinc-200 dark:border-zinc-800 mb-8">
-            <h2 className="text-2xl font-bold text-zinc-900 dark:text-zinc-100 mb-6">Write a Review</h2>
-            <div className="space-y-6">
-              <div>
-                <label className="block text-sm font-semibold text-zinc-500 dark:text-zinc-400 mb-2 uppercase tracking-wider">Your Rating</label>
-                <Rating
-                  value={newReview.rating}
-                  onChange={(rating) => setNewReview({ ...newReview, rating })}
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-semibold text-zinc-500 dark:text-zinc-400 mb-2 uppercase tracking-wider">Your Comment</label>
-                <textarea
-                  value={newReview.comment}
-                  onChange={(e) => setNewReview({ ...newReview, comment: e.target.value })}
-                  className="w-full px-4 py-3 bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all text-zinc-900 dark:text-zinc-100"
-                  rows={4}
-                  placeholder="Share your thoughts about this resource..."
-                />
-              </div>
-              <button
-                onClick={handleSubmitReview}
-                className="px-8 py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-colors font-bold shadow-lg shadow-blue-500/25"
-              >
-                Submit Review
-              </button>
-            </div>
-          </div>
-
-          <div className="bg-white dark:bg-zinc-900 rounded-2xl p-8 shadow-sm border border-zinc-200 dark:border-zinc-800">
-            <h2 className="text-2xl font-bold text-zinc-900 dark:text-zinc-100 mb-6">Community Reviews ({reviews.length})</h2>
-            {reviews.length > 0 ? (
-              <div className="space-y-6">
-                {reviews.map((review: Review) => (
-                  <ReviewCard key={review.id} {...review} />
-                ))}
-              </div>
-            ) : (
-              <div className="text-center py-12 border-2 border-dashed border-zinc-100 dark:border-zinc-800 rounded-xl">
-                <p className="text-zinc-400">No reviews yet. Be the first to share your feedback!</p>
-              </div>
-            )}
           </div>
         </div>
       </section>
