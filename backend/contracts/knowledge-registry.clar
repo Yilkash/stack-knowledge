@@ -530,6 +530,21 @@
 	)
 )
 
+(define-public (toggle-resource-privacy (resource-id uint))
+	(let
+		(
+			(resource (unwrap! (map-get? resources { resource-id: resource-id }) err-not-found))
+			(current-privacy (default-to false (get is-private (map-get? resource-privacy { resource-id: resource-id }))))
+		)
+		(asserts! (is-eq tx-sender (get uploader resource)) err-unauthorized)
+		(map-set resource-privacy
+			{ resource-id: resource-id }
+			{ is-private: (not current-privacy) }
+		)
+		(ok true)
+	)
+)
+
 ;; Private function to update analytics
 (define-private (update-analytics (metric (string-utf8 50)) (delta uint))
 	(let
