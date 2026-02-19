@@ -430,3 +430,14 @@
 		(ok true)
 	)
 )
+
+(define-public (set-contract-owner (owner principal) (is-owner bool))
+	(begin
+		(asserts! (is-eq tx-sender contract-owner) err-owner-only)
+		(map-set contract-owners
+			{ owner: owner }
+			{ is-owner: is-owner }
+		)
+		(ok true)
+	)
+)
