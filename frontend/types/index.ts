@@ -26,6 +26,9 @@ export interface Leader {
   reputation: number;
   totalUploads: number;
   totalTips: number;
+  uploads?: number;
+  score?: number;
+  tipsReceived?: number;
 }
 
 /**
@@ -38,6 +41,8 @@ export interface User {
   totalTipsReceived: number;
   totalTipsGiven: number;
   joinedAt: number;
+  uploads?: number;
+  score?: number;
 }
 
 /**
