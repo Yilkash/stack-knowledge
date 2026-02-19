@@ -10,6 +10,7 @@ import ReviewCard from '@/components/ReviewCard';
 import Badge from '@/components/Badge';
 import { formatAddress, formatDate, formatSTX } from '@/lib/utils';
 import { Resource, Review } from '@/types';
+import { motion } from 'framer-motion';
 
 /**
  * Resource Detail page providing comprehensive information and AI chat integration.
@@ -81,12 +82,11 @@ export default function ResourceDetailPage() {
   };
 
   if (!resource) return (
-    <div className="min-h-screen flex items-center justify-center bg-zinc-50 dark:bg-zinc-950">
-      <div className="animate-pulse text-zinc-500 font-medium text-lg">Loading resource...</div>
+    <div className="min-h-screen flex items-center justify-center bg-background">
+      <div className="animate-pulse text-muted-foreground font-black text-2xl uppercase tracking-tighter">Initializing Library...</div>
     </div>
   );
 
-  return (
   return (
     <main className="min-h-screen bg-background text-foreground">
       <NavBar />
