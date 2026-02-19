@@ -3,6 +3,7 @@
 import NavBar from '@/components/NavBar';
 import Hero from '@/components/Hero';
 import SearchBar from '@/components/SearchBar';
+import ActivityFeed from '@/components/ActivityFeed';
 import FeatureCard from '@/components/FeatureCard';
 import Footer from '@/components/Footer';
 import { ShieldCheck, Bot, Coins } from 'lucide-react';
@@ -24,11 +25,12 @@ export default function Home() {
             transition={{ duration: 0.5 }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl font-bold text-foreground">Why StackKnowledge?</h2>
-            <p className="mt-4 text-muted-foreground dark:text-zinc-400">The first decentralized knowledge base that pays you to learn.</p>
+            <h2 className="text-3xl font-bold text-foreground font-mono tracking-tighter">WHY STACKKNOWLEDGE?</h2>
+            <p className="mt-4 text-muted-foreground font-medium">The first decentralized knowledge base that pays you to learn.</p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
+            {/* Features existing... */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -69,6 +71,8 @@ export default function Home() {
               />
             </motion.div>
           </div>
+
+          <ActivityFeed />
         </div>
       </section>
 
