@@ -191,6 +191,7 @@
 			(merge user-rep { total-uploads: (+ (get total-uploads user-rep) u1) })
 		)
 		(var-set total-resources resource-id)
+		(update-analytics "total-resources" u1)
 		(ok resource-id)
 	)
 )
@@ -237,6 +238,7 @@
 			})
 		)
 		
+		(update-analytics "total-tips" amount)
 		(ok true)
 	)
 )
