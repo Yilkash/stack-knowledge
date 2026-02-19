@@ -109,6 +109,10 @@
 	)
 )
 
+(define-read-only (get-resource-tags (resource-id uint))
+	(map-get? resource-tags { resource-id: resource-id })
+)
+
 ;; Calculate average rating for a resource
 (define-read-only (get-resource-rating (resource-id uint))
 	(let
