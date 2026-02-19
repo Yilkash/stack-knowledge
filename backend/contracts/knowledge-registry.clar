@@ -475,6 +475,17 @@
 	)
 )
 
+(define-public (set-category (name (string-utf8 50)) (description (string-utf8 200)))
+	(begin
+		(asserts! (is-eq tx-sender contract-owner) err-owner-only)
+		(map-set categories
+			{ name: name }
+			{ description: description, created-at: burn-block-height }
+		)
+		(ok true)
+	)
+)
+
 ;; Private function to update analytics
 (define-private (update-analytics (metric (string-utf8 50)) (delta uint))
 	(let
