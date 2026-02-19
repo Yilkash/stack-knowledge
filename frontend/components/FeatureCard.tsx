@@ -16,14 +16,14 @@ interface FeatureCardProps {
 export default function FeatureCard({ title, description, icon, className }: FeatureCardProps) {
     return (
         <div className={cn(
-            "p-6 bg-white dark:bg-zinc-900 rounded-2xl border border-zinc-100 dark:border-zinc-800 shadow-sm hover:shadow-md transition-all duration-300",
+            "p-8 glass rounded-3xl border border-white/10 shadow-lg hover:shadow-primary/20 hover:scale-105 transition-all duration-300 group",
             className
         )}>
-            <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center text-blue-600 dark:text-blue-400 mb-4">
+            <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center text-primary mb-6 group-hover:bg-primary group-hover:text-primary-foreground transition-colors duration-300">
                 {icon}
             </div>
-            <h3 className="text-xl font-bold text-zinc-900 dark:text-zinc-100 mb-2">{title}</h3>
-            <p className="text-zinc-600 dark:text-zinc-400">{description}</p>
+            <h3 className="text-2xl font-bold text-foreground mb-3">{title}</h3>
+            <p className="text-muted-foreground leading-relaxed italic">{description}</p>
         </div>
     );
 }
