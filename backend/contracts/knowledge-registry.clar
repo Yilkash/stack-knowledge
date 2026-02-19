@@ -410,3 +410,18 @@
 		(ok true)
 	)
 )
+
+(define-public (toggle-resource-archival (resource-id uint))
+	(let
+		(
+			(resource (unwrap! (map-get? resources { resource-id: resource-id }) err-not-found))
+			(current-archived (default-to false (get is-archived (map-get? resource-archived { resource-id: resource-id }))))
+		)
+		(asserts! (is-eq tx-sender (get uploader resource)) err-unauthorized)
+		(map-set resource-archived
+			{ resource-id: resource-id }
+			{ is-archived: (not current-archived) }
+		)
+		(ok true)
+	)
+)
