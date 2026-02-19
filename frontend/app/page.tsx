@@ -2,6 +2,7 @@
 
 import NavBar from '@/components/NavBar';
 import Hero from '@/components/Hero';
+import SearchBar from '@/components/SearchBar';
 import FeatureCard from '@/components/FeatureCard';
 import Footer from '@/components/Footer';
 import { ShieldCheck, Bot, Coins } from 'lucide-react';
@@ -9,9 +10,10 @@ import { motion } from 'framer-motion';
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-background">
+    <main className="min-h-screen bg-background text-foreground">
       <NavBar />
       <Hero />
+      <SearchBar />
 
       <section className="py-20 bg-zinc-50 dark:bg-zinc-950/50 transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
