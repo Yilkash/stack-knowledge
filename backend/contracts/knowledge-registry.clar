@@ -95,6 +95,11 @@
 	{ amount: uint, last-claimed: uint }
 )
 
+(define-map platform-analytics
+	{ metric: (string-utf8 50) }
+	{ value: uint }
+)
+
 ;; Read-only functions
 
 ;; Get metadata for a specific resource
