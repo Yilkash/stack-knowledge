@@ -100,6 +100,11 @@
 	{ value: uint }
 )
 
+(define-map categories
+	{ name: (string-utf8 50) }
+	{ description: (string-utf8 200), created-at: uint }
+)
+
 ;; Read-only functions
 
 ;; Get metadata for a specific resource
