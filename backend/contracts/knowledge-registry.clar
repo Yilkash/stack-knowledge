@@ -514,6 +514,17 @@
 	)
 )
 
+(define-public (set-reputation-level (user principal) (level uint) (badge (string-utf8 20)))
+	(begin
+		(asserts! (is-eq tx-sender contract-owner) err-owner-only)
+		(map-set reputation-levels
+			{ user: user }
+			{ level: level, badge: badge }
+		)
+		(ok true)
+	)
+)
+
 ;; Private function to update analytics
 (define-private (update-analytics (metric (string-utf8 50)) (delta uint))
 	(let
