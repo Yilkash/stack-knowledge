@@ -358,3 +358,12 @@
 		(ok true)
 	)
 )
+
+(define-public (set-platform-fee-percentage (new-fee uint))
+	(begin
+		(asserts! (is-eq tx-sender contract-owner) err-owner-only)
+		(asserts! (<= new-fee u100) err-invalid-amount)
+		(var-set platform-fee-percentage new-fee)
+		(ok true)
+	)
+)
