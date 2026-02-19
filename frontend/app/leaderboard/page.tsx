@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import NavBar from '@/components/NavBar';
 import Footer from '@/components/Footer';
-import { formatAddress, formatSTX, cn } from '@/lib/utils';
+import { formatSTX, cn } from '@/lib/utils';
 import { Leader } from '@/types';
 import { motion } from 'framer-motion';
 

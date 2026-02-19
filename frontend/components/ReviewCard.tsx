@@ -1,6 +1,6 @@
 'use client';
 
-import { formatAddress, formatDate, cn } from '@/lib/utils';
+import { formatDate, cn } from '@/lib/utils';
 import Rating from './Rating';
 
 interface ReviewCardProps {
