@@ -90,6 +90,11 @@
 	{ is-owner: bool }
 )
 
+(define-map contributor-rewards
+	{ user: principal }
+	{ amount: uint, last-claimed: uint }
+)
+
 ;; Read-only functions
 
 ;; Get metadata for a specific resource
