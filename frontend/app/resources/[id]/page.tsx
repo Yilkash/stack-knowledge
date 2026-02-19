@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'next/navigation';
 import NavBar from '@/components/NavBar';
 import Footer from '@/components/Footer';
+import TipButton from '@/components/TipButton';
 import Rating from '@/components/Rating';
 import ReviewCard from '@/components/ReviewCard';
 import { formatAddress, formatDate, formatSTX } from '@/lib/utils';
