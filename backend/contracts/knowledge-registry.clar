@@ -467,3 +467,16 @@
 		)
 	)
 )
+
+;; Private function to update analytics
+(define-private (update-analytics (metric (string-utf8 50)) (delta uint))
+	(let
+		(
+			(current-val (default-to u0 (get value (map-get? platform-analytics { metric: metric }))))
+		)
+		(map-set platform-analytics
+			{ metric: metric }
+			{ value: (+ current-val delta) }
+		)
+	)
+)
