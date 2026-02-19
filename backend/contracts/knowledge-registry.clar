@@ -367,3 +367,14 @@
 		(ok true)
 	)
 )
+
+(define-public (report-resource (resource-id uint) (reason (string-utf8 100)))
+	(begin
+		(unwrap! (map-get? resources { resource-id: resource-id }) err-not-found)
+		(map-set reported-resources
+			{ resource-id: resource-id, reporter: tx-sender }
+			{ reason: reason, created-at: burn-block-height }
+		)
+		(ok true)
+	)
+)
