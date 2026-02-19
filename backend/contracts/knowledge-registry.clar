@@ -451,3 +451,19 @@
 		(ok true)
 	)
 )
+
+(define-public (distribute-reward (user principal) (amount uint))
+	(begin
+		(asserts! (is-eq tx-sender contract-owner) err-owner-only)
+		(let
+			(
+				(current-rewards (default-to { amount: u0, last-claimed: u0 } (map-get? contributor-rewards { user: user })))
+			)
+			(map-set contributor-rewards
+				{ user: user }
+				{ amount: (+ (get amount current-rewards) amount), last-claimed: burn-block-height }
+			)
+			(ok true)
+		)
+	)
+)
