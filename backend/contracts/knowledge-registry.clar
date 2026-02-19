@@ -105,6 +105,11 @@
 	{ description: (string-utf8 200), created-at: uint }
 )
 
+(define-map viewing-history
+	{ user: principal, resource-id: uint }
+	{ last-viewed: uint, view-count: uint }
+)
+
 ;; Read-only functions
 
 ;; Get metadata for a specific resource
