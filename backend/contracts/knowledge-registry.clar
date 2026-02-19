@@ -80,6 +80,11 @@
 	{ is-verified: bool, verified-at: uint, verified-by: principal }
 )
 
+(define-map resource-archived
+	{ resource-id: uint }
+	{ is-archived: bool }
+)
+
 ;; Read-only functions
 
 ;; Get metadata for a specific resource
