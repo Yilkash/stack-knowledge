@@ -19,18 +19,18 @@ export default function Badge({
   ...props
 }: BadgeProps) {
   const variants = {
-    default: 'bg-zinc-100 text-zinc-800 border-zinc-200',
-    success: 'bg-green-100 text-green-800 border-green-200',
-    warning: 'bg-yellow-100 text-yellow-800 border-yellow-200',
-    error: 'bg-red-100 text-red-800 border-red-200',
-    info: 'bg-blue-100 text-blue-800 border-blue-200',
-    outline: 'bg-transparent text-zinc-600 dark:text-zinc-400 border-zinc-200 dark:border-zinc-800'
+    default: 'bg-zinc-900 text-zinc-100 border-zinc-800',
+    success: 'bg-green-500/10 text-green-500 border-green-500/20',
+    warning: 'bg-amber-500/10 text-amber-500 border-amber-500/20',
+    error: 'bg-red-500/10 text-red-500 border-red-500/20',
+    info: 'bg-primary/10 text-primary border-primary/20',
+    outline: 'bg-transparent text-muted-foreground border-white/10'
   };
 
   const sizes = {
-    sm: 'px-2 py-0.5 text-xs',
-    md: 'px-2.5 py-0.5 text-sm',
-    lg: 'px-3 py-1 text-base'
+    sm: 'px-3 py-1 text-[10px] uppercase font-black tracking-widest',
+    md: 'px-4 py-1.5 text-xs uppercase font-black tracking-widest',
+    lg: 'px-5 py-2 text-sm uppercase font-black tracking-widest'
   };
 
   return (

@@ -17,7 +17,7 @@ export default function Rating({ value, onChange, readonly = false, size = 'md',
   };
 
   return (
-    <div className={cn("flex gap-1", className)}>
+    <div className={cn("flex gap-2", className)}>
       {[1, 2, 3, 4, 5].map((star) => (
         <button
           key={star}
@@ -25,12 +25,12 @@ export default function Rating({ value, onChange, readonly = false, size = 'md',
           onClick={() => !readonly && onChange?.(star)}
           disabled={readonly}
           className={cn(
-            "transition-all duration-200 focus:outline-none",
-            readonly ? 'cursor-default' : 'cursor-pointer hover:scale-110',
-            star <= value ? 'text-yellow-400 fill-yellow-400' : 'text-zinc-300 dark:text-zinc-600'
+            "transition-all duration-300 focus:outline-none",
+            readonly ? 'cursor-default' : 'cursor-pointer hover:scale-125 hover:-rotate-12',
+            star <= value ? 'text-primary fill-primary shadow-[0_0_15px_rgba(14,165,233,0.3)]' : 'text-zinc-800'
           )}
         >
-          <Star className={sizeClasses[size]} />
+          <Star className={cn(sizeClasses[size], "fill-current")} />
         </button>
       ))}
     </div>

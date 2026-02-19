@@ -22,16 +22,15 @@ export default function TipButton({ resourceId }: TipButtonProps) {
 
     if (showOptions) {
         return (
-            <div className="flex gap-2 items-center animate-in slide-in-from-right-4 duration-200">
+            <div className="flex gap-3 items-center animate-in slide-in-from-right-8 duration-500 glass p-2 rounded-2xl border border-white/5 shadow-2xl">
                 {[1, 5, 10].map((amount) => (
                     <button
                         key={amount}
                         disabled={loading}
                         onClick={() => handleTip(amount)}
                         className={cn(
-                            "px-4 py-1.5 rounded-full text-sm font-bold transition-all border",
-                            "bg-green-500/10 text-green-600 border-green-200 hover:bg-green-500 hover:text-white hover:border-green-500",
-                            "dark:bg-green-500/10 dark:text-green-400 dark:border-green-900/50 dark:hover:bg-green-500 dark:hover:text-white",
+                            "px-6 py-2 rounded-xl text-xs font-black uppercase tracking-widest transition-all border",
+                            "bg-primary text-primary-foreground border-primary shadow-xl shadow-primary/20 hover:scale-110",
                             loading && "opacity-50 cursor-not-allowed"
                         )}
                     >
@@ -40,10 +39,10 @@ export default function TipButton({ resourceId }: TipButtonProps) {
                 ))}
                 <button
                     onClick={() => setShowOptions(false)}
-                    className="ml-1 text-zinc-400 hover:text-zinc-600 dark:text-zinc-500 dark:hover:text-zinc-300 transition-colors"
+                    className="p-2 text-muted-foreground hover:text-foreground transition-all hover:rotate-90"
                 >
                     <span className="sr-only">Cancel</span>
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
                 </button>
             </div>
         );
@@ -54,10 +53,11 @@ export default function TipButton({ resourceId }: TipButtonProps) {
             variant="outline"
             size="lg"
             onClick={() => setShowOptions(true)}
-            className="items-center gap-2 border-green-200 text-green-600 hover:bg-green-50 dark:border-green-800/50 dark:text-green-400 dark:hover:bg-green-900/20 font-bold px-6"
+            className="items-center gap-4 border-primary/20 bg-primary/10 text-primary hover:bg-primary hover:text-primary-foreground transform active:scale-95 transition-all font-black px-10 py-5 rounded-[20px] shadow-2xl shadow-primary/10"
             disabled={loading}
         >
-            <span className="text-xl">❤️</span> {loading ? 'Processing...' : 'Tip Author'}
+            <span className="text-2xl animate-pulse">⚡</span>
+            <span className="uppercase tracking-widest">{loading ? 'PROCESSING...' : 'SUPPORT CONTRIBUTOR'}</span>
         </Button>
     );
 }
