@@ -330,3 +330,17 @@
 		(ok true)
 	)
 )
+
+(define-public (update-resource-metadata (resource-id uint) (title (string-utf8 100)) (description (string-utf8 500)))
+	(let
+		(
+			(resource (unwrap! (map-get? resources { resource-id: resource-id }) err-not-found))
+		)
+		(asserts! (is-eq tx-sender (get uploader resource)) err-unauthorized)
+		(map-set resources
+			{ resource-id: resource-id }
+			(merge resource { title: title, description: description })
+		)
+		(ok true)
+	)
+)
