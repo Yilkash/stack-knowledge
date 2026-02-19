@@ -75,6 +75,11 @@
 	{ reason: (string-utf8 100), created-at: uint }
 )
 
+(define-map verified-educators
+	{ user: principal }
+	{ is-verified: bool, verified-at: uint, verified-by: principal }
+)
+
 ;; Read-only functions
 
 ;; Get metadata for a specific resource
