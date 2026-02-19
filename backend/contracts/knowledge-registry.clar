@@ -117,6 +117,10 @@
 	(default-to false (get is-featured (map-get? featured-resources { resource-id: resource-id })))
 )
 
+(define-read-only (is-user-verified (user principal))
+	(default-to false (get is-verified (map-get? verified-educators { user: user })))
+)
+
 ;; Calculate average rating for a resource
 (define-read-only (get-resource-rating (resource-id uint))
 	(let
