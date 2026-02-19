@@ -65,6 +65,11 @@
 	{ tags: (list 10 (string-utf8 20)) }
 )
 
+(define-map featured-resources
+	{ resource-id: uint }
+	{ is-featured: bool, featured-at: uint }
+)
+
 ;; Read-only functions
 
 ;; Get metadata for a specific resource
