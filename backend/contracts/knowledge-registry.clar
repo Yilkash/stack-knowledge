@@ -319,3 +319,14 @@
 		(ok true)
 	)
 )
+
+(define-public (verify-educator (user principal) (is-verified bool))
+	(begin
+		(asserts! (is-eq tx-sender contract-owner) err-owner-only)
+		(map-set verified-educators
+			{ user: user }
+			{ is-verified: is-verified, verified-at: burn-block-height, verified-by: tx-sender }
+		)
+		(ok true)
+	)
+)
