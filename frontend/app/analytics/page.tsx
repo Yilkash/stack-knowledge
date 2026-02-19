@@ -1,5 +1,3 @@
-import { motion } from 'framer-motion';
-
 /**
  * Platform Analytics dashboard providing real-time insights into resource distribution,
  * category popularity, and recent on-chain activity.
@@ -38,26 +36,21 @@ export default function AnalyticsPage() {
 
       <section className="py-40 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-20 border-b border-white/5 pb-16">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-          >
+          <div>
             <h1 className="text-5xl md:text-7xl font-black text-foreground mb-6 tracking-tighter uppercase leading-none">
               Platform <span className="text-primary">Intelligence</span>
             </h1>
             <p className="text-xl text-muted-foreground font-medium italic max-w-2xl">
               Deep-dive metrics and real-time observability into the StackKnowledge decentralized ecosystem.
             </p>
-          </motion.div>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
+          <div
             className="flex items-center gap-4 text-xs font-black uppercase tracking-widest text-primary bg-primary/10 px-8 py-4 rounded-full border border-primary/20 shadow-2xl shadow-primary/10"
           >
             <span className="w-3 h-3 rounded-full bg-primary animate-ping"></span>
             Observing Mainnet activity
-          </motion.div>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-24">
@@ -88,10 +81,7 @@ export default function AnalyticsPage() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
+          <div
             className="lg:col-span-3 glass rounded-[40px] p-12 border border-white/5 shadow-2xl"
           >
             <h2 className="text-3xl font-black uppercase tracking-tighter mb-12 flex items-center gap-4">
@@ -106,22 +96,17 @@ export default function AnalyticsPage() {
                     <span className="text-xs font-black text-primary bg-primary/10 px-4 py-1 rounded-full">{100 - i * 15}% Reach</span>
                   </div>
                   <div className="w-full h-4 bg-white/5 rounded-full overflow-hidden border border-white/5 p-1">
-                    <motion.div
-                      initial={{ width: 0 }}
-                      whileInView={{ width: `${100 - i * 15}%` }}
-                      transition={{ duration: 1.5, ease: "circOut" }}
+                    <div
+                      style={{ width: `${100 - i * 15}%` }}
                       className="h-full bg-gradient-to-r from-primary via-primary-400 to-primary-600 rounded-full"
                     />
                   </div>
                 </div>
               ))}
             </div>
-          </motion.div>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
+          <div
             className="lg:col-span-2 glass rounded-[40px] p-12 border border-white/5 shadow-2xl relative overflow-hidden"
           >
             <div className="absolute top-0 right-0 p-8">
@@ -152,11 +137,8 @@ export default function AnalyticsPage() {
                   { icon: "⬇️", text: "Knowledge asset synchronized", time: "18m ago", color: "text-zinc-500" },
                   { icon: "💬", text: "AI verification cycle started", time: "22m ago", color: "text-indigo-500" },
                 ].map((activity, i) => (
-                  <motion.div
+                  <div
                     key={i}
-                    initial={{ opacity: 0, x: 20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ delay: i * 0.1 }}
                     className="flex items-center gap-6 p-6 rounded-[28px] hover:bg-white/5 transition-all border border-transparent hover:border-white/5 group"
                   >
                     <div className="w-16 h-16 glass rounded-2xl flex items-center justify-center text-3xl group-hover:scale-110 transition-transform shadow-lg shadow-black/20">
@@ -166,18 +148,16 @@ export default function AnalyticsPage() {
                       <p className="text-foreground font-black text-sm uppercase tracking-tight group-hover:text-primary transition-colors">{activity.text}</p>
                       <p className="text-muted-foreground text-[10px] font-black uppercase tracking-widest mt-2 bg-white/5 px-3 py-1 rounded-full w-fit">{activity.time}</p>
                     </div>
-                  </motion.div>
+                  </div>
                 ))
               )}
             </div>
             <button className="w-full mt-12 py-5 text-xs font-black text-muted-foreground hover:text-primary transition-all uppercase tracking-[0.3em] border border-white/5 rounded-2xl hover:bg-white/5">
               Access Full Archives
             </button>
-          </motion.div>
+          </div>
         </div>
       </section>
 
       <Footer />
     </main>
-  );
-}

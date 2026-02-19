@@ -1,85 +1,42 @@
+import NavBar from '@/components/NavBar';
+import Footer from '@/components/Footer';
+
 'use client';
 
-import { useState } from 'react';
-import NavBar from '@/components/NavBar';
-import Card from '@/components/Card';
-import Button from '@/components/Button';
-
+/**
+ * Intelligent AI Chat interface for resource interrogation and knowledge synthesis.
+ */
 export default function ChatPage() {
-    const [messages, setMessages] = useState<{ role: 'user' | 'assistant', content: string }[]>([
-        { role: 'assistant', content: 'Hello! I am your AI study buddy. Ask me anything about "Introduction to Linear Algebra".' }
-    ]);
-    const [input, setInput] = useState('');
-
-    const handleSend = async () => {
-        if (!input.trim()) return;
-
-        const userMessage = { role: 'user' as const, content: input };
-        setMessages((prev: { role: 'user' | 'assistant'; content: string }[]) => [...prev, userMessage]);
-        setInput('');
-
-        try {
-            const response = await fetch('/api/chat', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    messages: [...messages, userMessage],
-                    documentId: '123' // Mock ID
-                })
-            });
-
-            const data = await response.json();
-            setMessages((prev: { role: 'user' | 'assistant'; content: string }[]) => [...prev, { role: 'assistant', content: data.content }]);
-        } catch (error) {
-            console.error(error);
-            setMessages((prev: { role: 'user' | 'assistant'; content: string }[]) => [...prev, { role: 'assistant', content: 'Sorry, I encountered an error. Please try again.' }]);
-        }
-    };
-
     return (
-        <main className="min-h-screen bg-zinc-50 flex flex-col">
+        <main className="min-h-screen bg-background text-foreground">
             <NavBar />
 
-            <div className="flex-grow pt-20 pb-4 max-w-5xl mx-auto w-full px-4 flex gap-6 h-[calc(100vh-20px)]">
-                {/* PDF Viewer / Context Panel */}
-                <div className="hidden lg:block w-1/2 bg-zinc-200 rounded-2xl animate-pulse">
-                    <div className="h-full flex items-center justify-center text-zinc-400">
-                        PDF Viewer Placeholder
+            <section className="py-40 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto flex flex-col items-center justify-center text-center">
+                <h1 className="text-6xl md:text-8xl font-black uppercase tracking-tighter mb-8 leading-none">
+                    KNOWLEDGE <span className="text-primary italic">SYNTHESIS</span>
+                </h1>
+                <p className="text-xl text-muted-foreground max-w-2xl font-medium italic mb-12">
+                    Harness the power of community-verified intelligence through our advanced AI interrogation protocols.
+                </p>
+
+                <div className="w-full max-w-4xl glass rounded-[40px] p-12 lg:p-20 border border-white/5 shadow-2xl flex flex-col items-center">
+                    <div className="w-20 h-20 bg-primary/10 rounded-[32px] flex items-center justify-center text-primary text-4xl mb-8 animate-pulse">
+                        🤖
                     </div>
+                    <h2 className="text-3xl font-black uppercase tracking-tighter mb-4">Neural Interface Initializing</h2>
+                    <p className="text-muted-foreground font-medium uppercase tracking-widest text-xs mb-12">Protocol Version 2.0.4-BETA</p>
+
+                    <div className="w-full h-2 bg-white/5 rounded-full overflow-hidden mb-12">
+                        <div className="h-full bg-primary w-1/3 animate-progress"></div>
+                    </div>
+
+                    <button className="px-12 py-5 bg-foreground text-background rounded-[24px] font-black uppercase tracking-[0.2em] shadow-2xl hover:scale-105 transition-all">
+                        Authenticate to Sync
+                    </button>
                 </div>
+            </section>
 
-                {/* Chat Panel */}
-                <Card className="flex-1 flex flex-col bg-white h-full max-h-[85vh]">
-                    <div className="p-4 border-b border-zinc-100">
-                        <h2 className="font-bold text-zinc-800">Chat Session</h2>
-                        <p className="text-xs text-zinc-500">Context: Introduction to Linear Algebra.pdf</p>
-                    </div>
-
-                    <div className="flex-grow overflow-y-auto p-4 space-y-4">
-                        {messages.map((msg, idx) => (
-                            <div key={idx} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                                <div className={`max-w-[80%] rounded-2xl p-3 px-4 text-sm ${msg.role === 'user' ? 'bg-blue-600 text-white rounded-br-none' : 'bg-zinc-100 text-zinc-800 rounded-bl-none'}`}>
-                                    {msg.content}
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-
-                    <div className="p-4 border-t border-zinc-100">
-                        <div className="flex gap-2">
-                            <input
-                                type="text"
-                                value={input}
-                                onChange={(e) => setInput(e.target.value)}
-                                onKeyDown={(e) => e.key === 'Enter' && handleSend()}
-                                className="flex-grow px-4 py-2 border border-zinc-200 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                placeholder="Ask a question..."
-                            />
-                            <Button onClick={handleSend} size="sm">Send</Button>
-                        </div>
-                    </div>
-                </Card>
-            </div>
+            <Footer />
         </main>
     );
 }
