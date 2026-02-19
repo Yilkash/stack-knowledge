@@ -307,3 +307,15 @@
 		(ok true)
 	)
 )
+
+(define-public (set-featured-resource (resource-id uint) (is-featured bool))
+	(begin
+		(asserts! (is-eq tx-sender contract-owner) err-owner-only)
+		(unwrap! (map-get? resources { resource-id: resource-id }) err-not-found)
+		(map-set featured-resources
+			{ resource-id: resource-id }
+			{ is-featured: is-featured, featured-at: burn-block-height }
+		)
+		(ok true)
+	)
+)
