@@ -115,6 +115,11 @@
 	{ level: uint, badge: (string-utf8 20) }
 )
 
+(define-map resource-privacy
+	{ resource-id: uint }
+	{ is-private: bool }
+)
+
 ;; Read-only functions
 
 ;; Get metadata for a specific resource
