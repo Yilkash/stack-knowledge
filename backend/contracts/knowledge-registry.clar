@@ -378,3 +378,30 @@
 		(ok true)
 	)
 )
+
+(define-public (delete-review (review-id uint))
+	(let
+		(
+			(review (unwrap! (map-get? reviews { review-id: review-id }) err-not-found))
+			(resource-id (get resource-id review))
+			(resource (unwrap! (map-get? resources { resource-id: resource-id }) err-not-found))
+			(rating (get rating review))
+		)
+		(asserts! (is-eq tx-sender (get reviewer review)) err-unauthorized)
+		
+		;; Update resource rating
+		(map-set resources
+			{ resource-id: resource-id }
+			(merge resource {
+				rating-sum: (- (get rating-sum resource) rating),
+				rating-count: (- (get rating-count resource) u1)
+			})
+		)
+		
+		;; Remove review from maps
+		(map-delete reviews { review-id: review-id })
+		(map-delete user-reviews { user: tx-sender, resource-id: resource-id })
+		
+		(ok true)
+	)
+)
