@@ -293,3 +293,17 @@
 		(ok true)
 	)
 )
+
+(define-public (set-resource-tags (resource-id uint) (tags (list 10 (string-utf8 20))))
+	(let
+		(
+			(resource (unwrap! (map-get? resources { resource-id: resource-id }) err-not-found))
+		)
+		(asserts! (is-eq tx-sender (get uploader resource)) err-unauthorized)
+		(map-set resource-tags
+			{ resource-id: resource-id }
+			{ tags: tags }
+		)
+		(ok true)
+	)
+)
