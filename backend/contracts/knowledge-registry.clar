@@ -491,6 +491,24 @@
 	)
 )
 
+(define-public (record-view (resource-id uint))
+	(let
+		(
+			(current-view (default-to { last-viewed: burn-block-height, view-count: u0 } (map-get? viewing-history { user: tx-sender, resource-id: resource-id })))
+		)
+		(unwrap! (map-get? resources { resource-id: resource-id }) err-not-found)
+		(map-set viewing-history
+			{ user: tx-sender, resource-id: resource-id }
+			{ 
+				last-viewed: burn-block-height, 
+				view-count: (+ (get view-count current-view) u1) 
+			}
+		)
+		(update-analytics "total-views" u1)
+		(ok true)
+	)
+)
+
 ;; Private function to update analytics
 (define-private (update-analytics (metric (string-utf8 50)) (delta uint))
 	(let
