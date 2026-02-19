@@ -56,18 +56,26 @@ export default function ResourcesPage() {
   }, []);
 
   return (
-    <main className="min-h-screen bg-zinc-50 dark:bg-zinc-950/50">
+    <main className="min-h-screen bg-background text-foreground">
       <NavBar />
 
-      <section className="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-zinc-900 dark:text-zinc-100 mb-4">Browse Resources</h1>
-          <p className="text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto">
-            Find verified past questions, handouts, and study materials shared by the community.
-          </p>
+      <section className="py-32 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div className="text-center mb-16 px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <h1 className="text-5xl md:text-7xl font-black tracking-tighter mb-6">
+              RESOURCES <span className="text-primary">&</span> NOTES
+            </h1>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto font-medium leading-relaxed italic">
+              Empowering your academic journey with the best peer-shared materials on the Stacks blockchain.
+            </p>
+          </motion.div>
         </div>
 
-        <div className="mb-12">
+        <div className="mb-20 glass p-4 rounded-3xl border border-white/5 shadow-2xl">
           <SearchBar onSearch={handleSearch} />
         </div>
 
