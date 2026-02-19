@@ -24,6 +24,7 @@ export const metadata: Metadata = {
 
 import { ThemeProvider } from "@/components/ThemeProvider";
 import ErrorBoundary from "@/components/ErrorBoundary";
+import ToastContainer from "@/components/ToastContainer";
 import Script from "next/script";
 
 export default function RootLayout({
@@ -64,6 +65,7 @@ export default function RootLayout({
         >
           <ErrorBoundary>
             {children}
+            <ToastContainer />
           </ErrorBoundary>
         </ThemeProvider>
       </body>

@@ -6,7 +6,7 @@ import NavBar from '@/components/NavBar';
 import Footer from '@/components/Footer';
 import StatCard from '@/components/StatCard';
 import ResourceCard from '@/components/ResourceCard';
-import { formatSTX } from '@/lib/utils';
+import { formatSTX, cn } from '@/lib/utils';
 import { User, Resource } from '@/types';
 import { motion } from 'framer-motion';
 
@@ -18,9 +18,11 @@ export default function ProfilePage() {
   const { userData, isSignedIn } = useStacksAuth();
   const [profile, setProfile] = useState<User | null>(null);
   const [userResources] = useState<Resource[]>([]);
+  const [activeTab, setActiveTab] = useState<'uploads' | 'tips'>('uploads');
 
   const fetchProfile = useCallback(async () => {
     if (!userData) return;
+    // ... rest of fetchProfile ...
 
     // Simulate fetch with slight delay to avoid sync setState in effect
     await new Promise(resolve => setTimeout(resolve, 0));
@@ -123,30 +125,62 @@ export default function ProfilePage() {
               <StatCard label="Tips Given" value={formatSTX(profile.totalTipsGiven) + ' STX'} icon="🎁" />
             </div>
 
-            <div className="flex items-center justify-between mb-12">
-              <h2 className="text-3xl font-black uppercase tracking-tighter">My Contributions</h2>
-              <div className="text-xs font-black uppercase tracking-widest text-muted-foreground bg-white/5 px-6 py-2 rounded-full border border-white/5">
-                {userResources.length} Total Items
-              </div>
+            <div className="flex items-center gap-12 mb-16 border-b border-white/5 pb-0">
+              <button
+                onClick={() => setActiveTab('uploads')}
+                className={cn(
+                  "pb-6 text-sm font-black uppercase tracking-widest transition-all relative",
+                  activeTab === 'uploads' ? "text-primary" : "text-muted-foreground hover:text-foreground"
+                )}
+              >
+                Uploads
+                {activeTab === 'uploads' && (
+                  <motion.div layoutId="tab-indicator" className="absolute bottom-0 left-0 right-0 h-1 bg-primary rounded-full shadow-[0_0_15px_rgba(14,165,233,0.5)]" />
+                )}
+              </button>
+              <button
+                onClick={() => setActiveTab('tips')}
+                className={cn(
+                  "pb-6 text-sm font-black uppercase tracking-widest transition-all relative",
+                  activeTab === 'tips' ? "text-primary" : "text-muted-foreground hover:text-foreground"
+                )}
+              >
+                Earnings
+                {activeTab === 'tips' && (
+                  <motion.div layoutId="tab-indicator" className="absolute bottom-0 left-0 right-0 h-1 bg-primary rounded-full shadow-[0_0_15px_rgba(14,165,233,0.5)]" />
+                )}
+              </button>
             </div>
 
-            {userResources.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-                {userResources.map((resource: Resource) => (
-                  <ResourceCard key={resource.id} resource={resource} />
-                ))}
-              </div>
-            ) : (
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                className="text-center py-24 glass rounded-[40px] border border-white/5 border-dashed bg-white/[0.02]"
-              >
-                <div className="text-5xl mb-6 opacity-30">📭</div>
-                <p className="text-foreground text-2xl font-black border-none bg-transparent mb-3 uppercase tracking-tight">The Library is Empty</p>
-                <p className="text-muted-foreground max-w-md mx-auto font-medium italic">Start sharing study materials to earn STX and build your reputation within the community.</p>
-              </motion.div>
-            )}
+            <motion.div
+              key={activeTab}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              transition={{ duration: 0.3 }}
+            >
+              {activeTab === 'uploads' ? (
+                userResources.length > 0 ? (
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                    {userResources.map((resource: Resource) => (
+                      <ResourceCard key={resource.id} resource={resource} />
+                    ))}
+                  </div>
+                ) : (
+                  <div className="text-center py-24 glass rounded-[40px] border border-white/5 border-dashed bg-white/[0.02]">
+                    <div className="text-5xl mb-6 opacity-30">📭</div>
+                    <p className="text-foreground text-2xl font-black border-none bg-transparent mb-3 uppercase tracking-tight">The Library is Empty</p>
+                    <p className="text-muted-foreground max-w-md mx-auto font-medium italic">Start sharing study materials to earn STX and build your reputation within the community.</p>
+                  </div>
+                )
+              ) : (
+                <div className="text-center py-24 glass rounded-[40px] border border-white/5 border-dashed bg-white/[0.02]">
+                  <div className="text-5xl mb-6 opacity-30">🪙</div>
+                  <p className="text-foreground text-2xl font-black border-none bg-transparent mb-3 uppercase tracking-tight">No Tips Collected Yet</p>
+                  <p className="text-muted-foreground max-w-md mx-auto font-medium italic">Your high-quality contributions will attract rewards from the community over time.</p>
+                </div>
+              )}
+            </motion.div>
           </>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">

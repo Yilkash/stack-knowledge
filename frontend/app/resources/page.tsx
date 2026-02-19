@@ -8,8 +8,10 @@ import ResourceCard from '@/components/ResourceCard';
 import Pagination from '@/components/Pagination';
 import ResourceCardSkeleton from '@/components/ResourceCardSkeleton';
 import EmptyState from '@/components/EmptyState';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Resource } from '@/types';
+import { X } from 'lucide-react';
+import Link from 'next/link';
 
 /**
  * Main resources page displaying a searchable list of educational materials.
@@ -22,6 +24,7 @@ export default function ResourcesPage() {
   const [totalPages, setTotalPages] = useState(1);
   const [currentQuery, setCurrentQuery] = useState('');
   const [currentCategory, setCurrentCategory] = useState('');
+  const [selectedResource, setSelectedResource] = useState<Resource | null>(null);
 
   const fetchResources = async (query = '', category = '', page = 1) => {
     setLoading(true);
@@ -95,7 +98,9 @@ export default function ResourcesPage() {
                 className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
               >
                 {resources.map((resource: Resource) => (
-                  <ResourceCard key={resource.id} resource={resource} />
+                  <div key={resource.id} onClick={() => setSelectedResource(resource)}>
+                    <ResourceCard resource={resource} />
+                  </div>
                 ))}
               </motion.div>
             ) : (
@@ -115,6 +120,71 @@ export default function ResourcesPage() {
             />
           </>
         )}
+
+        <AnimatePresence>
+          {selectedResource && (
+            <>
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                onClick={() => setSelectedResource(null)}
+                className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[60]"
+              />
+              <motion.div
+                initial={{ x: '100%' }}
+                animate={{ x: 0 }}
+                exit={{ x: '100%' }}
+                transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+                className="fixed top-0 right-0 h-full w-full max-w-xl bg-background border-l border-white/5 z-[70] shadow-2xl p-12 overflow-y-auto"
+              >
+                <div className="flex justify-between items-start mb-12">
+                  <div className="px-4 py-1 bg-primary/10 rounded-full border border-primary/20 text-[10px] font-black tracking-widest text-primary uppercase">
+                    {selectedResource.category}
+                  </div>
+                  <button onClick={() => setSelectedResource(null)} className="text-muted-foreground hover:text-foreground">
+                    <X size={24} />
+                  </button>
+                </div>
+
+                <h2 className="text-4xl font-black tracking-tighter uppercase mb-6">{selectedResource.title}</h2>
+                <div className="flex items-center gap-4 mb-10 text-xs font-black uppercase tracking-widest text-muted-foreground">
+                  <span>By {selectedResource.uploader.slice(0, 10)}...</span>
+                  <span className="w-1 h-1 bg-white/20 rounded-full"></span>
+                  <span>{(selectedResource as any).rating || 4.5} Rating</span>
+                </div>
+
+                <div className="glass p-8 rounded-3xl border border-white/5 mb-10">
+                  <p className="text-foreground/80 leading-relaxed italic mb-8">
+                    {selectedResource.description || "This high-density intelligence asset contains curated peer-verified insights for the Stacks ecosystem."}
+                  </p>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="bg-white/5 p-4 rounded-2xl">
+                      <div className="text-[10px] font-black uppercase tracking-widest text-muted-foreground mb-1">Economy</div>
+                      <div className="text-lg font-black text-primary">{(selectedResource.totalTips / 1000000).toFixed(2)} STX</div>
+                    </div>
+                    <div className="bg-white/5 p-4 rounded-2xl">
+                      <div className="text-[10px] font-black uppercase tracking-widest text-muted-foreground mb-1">Deployed</div>
+                      <div className="text-lg font-black">2 days ago</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex flex-col gap-4">
+                  <Link
+                    href={`/resources/${selectedResource.id}`}
+                    className="w-full py-5 bg-foreground text-background text-center font-black uppercase tracking-widest rounded-2xl hover:scale-[1.02] transition-all"
+                  >
+                    View Full Intelligence
+                  </Link>
+                  <button className="w-full py-5 border border-white/5 bg-white/5 font-black uppercase tracking-widest rounded-2xl hover:bg-white/10 transition-all">
+                    Authorize Quick Download
+                  </button>
+                </div>
+              </motion.div>
+            </>
+          )}
+        </AnimatePresence>
       </section>
 
       <Footer />
