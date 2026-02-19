@@ -8,6 +8,7 @@ import StatCard from '@/components/StatCard';
 import ResourceCard from '@/components/ResourceCard';
 import { formatSTX } from '@/lib/utils';
 import { User, Resource } from '@/types';
+import { motion } from 'framer-motion';
 
 /**
  * User Profile page displaying contributions, reputation, and tipping history.

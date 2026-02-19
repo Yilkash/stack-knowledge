@@ -23,22 +23,26 @@ interface StatCardProps {
 export default function StatCard({ label, value, icon, trend, className }: StatCardProps) {
   return (
     <div className={cn(
-      "p-6 bg-white dark:bg-zinc-900 rounded-xl border border-zinc-200 dark:border-zinc-800 hover:shadow-lg transition-all duration-300",
+      "p-8 glass rounded-[32px] border border-white/5 hover:border-primary/30 transition-all hover:scale-[1.05] group",
       className
     )}>
-      <div className="flex items-center justify-between mb-2">
-        <p className="text-sm font-medium text-zinc-600 dark:text-zinc-400">{label}</p>
-        {icon && <span className="text-zinc-500 dark:text-zinc-400">{icon}</span>}
+      <div className="flex items-center justify-between mb-6">
+        <div className="w-12 h-12 bg-primary/10 rounded-2xl flex items-center justify-center text-primary text-xl group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
+          {icon}
+        </div>
+        {trend && (
+          <div className={cn(
+            "px-3 py-1 rounded-full text-[10px] font-black tracking-widest uppercase border",
+            trend.isPositive ? 'bg-green-500/10 text-green-500 border-green-500/20' : 'bg-red-500/10 text-red-500 border-red-500/20'
+          )}>
+            {trend.isPositive ? '↑' : '↓'} {Math.abs(trend.value)}%
+          </div>
+        )}
       </div>
-      <p className="text-3xl font-bold text-zinc-900 dark:text-zinc-100">{value}</p>
-      {trend && (
-        <p className={cn(
-          "text-sm mt-2 font-medium flex items-center gap-1",
-          trend.isPositive ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'
-        )}>
-          {trend.isPositive ? '↑' : '↓'} {Math.abs(trend.value)}%
-        </p>
-      )}
+      <div className="space-y-1">
+        <p className="text-4xl font-black tracking-tight text-foreground">{value}</p>
+        <p className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">{label}</p>
+      </div>
     </div>
   );
 }
