@@ -100,3 +100,10 @@ export interface Collection {
   isPublic: boolean;
   createdAt: number;
 }
+
+export interface QualityStats {
+  score: number;
+  level: 'bronze' | 'silver' | 'gold' | 'platinum';
+  plagiarismScore: number;
+  aiVerification: boolean;
+}
