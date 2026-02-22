@@ -1,57 +1,11 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 
-/**
- * API route for fetching and creating educational resources.
- */
-export async function GET(request: NextRequest) {
-  const searchParams = request.nextUrl.searchParams;
-  const category = searchParams.get('category') || 'Mathematics';
-  const page = parseInt(searchParams.get('page') || '1');
-  const limit = parseInt(searchParams.get('limit') || '12');
-
-  // TODO: Implement actual blockchain query
-  const mockResources = Array.from({ length: limit }, (_, i) => ({
-    id: i + 1,
-    title: `Resource ${i + 1}`,
-    description: 'Sample description',
-    uploader: 'ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM',
-    category: category,
-    totalTips: 1000000,
-    rating: 4.5,
-    createdAt: Date.now()
-  }));
-
+export async function GET() {
+  // Mock data for initial implementation
   return NextResponse.json({
-    success: true,
-    data: {
-      resources: mockResources,
-      total: 100,
-      page,
-      totalPages: Math.ceil(100 / limit)
-    }
+    resources: [
+      { id: 1, title: "Resource 1", description: "Desc 1", uploader: "ST1...1", totalTips: 100, createdAt: Date.now(), url: "ipfs://1" },
+      { id: 2, title: "Resource 2", description: "Desc 2", uploader: "ST1...2", totalTips: 200, createdAt: Date.now(), url: "ipfs://2" }
+    ]
   });
-}
-
-/**
- * API route for handling file sessions and providing unique hashes.
- */
-export async function POST(_request: NextRequest) {
-  try {
-    // TODO: Implement actual blockchain transaction
-
-    // TODO: Implement actual blockchain transaction
-    return NextResponse.json({
-      success: true,
-      data: { resourceId: 1 }
-    });
-  } catch (_error) {
-    return NextResponse.json(
-      {
-        success: false,
-        error: 'Failed to create resource',
-        message: 'An unexpected error occurred during resource registration.'
-      },
-      { status: 500 }
-    );
-  }
 }
