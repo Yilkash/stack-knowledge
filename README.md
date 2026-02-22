@@ -215,3 +215,9 @@ The project is officially deployed on the **Stacks Mainnet**.
 - [x] Backend API Infrastructure (Mock)
 - [x] Full UI Component Library (StatCard, ReviewCard, etc.)
 - [x] End-to-end routing for Resources, Leaderboard, and Profile.
+
+## Current Status (Phase 3 Complete)
+- [x] Social features: Follow/Unfollow and Curated Collections.
+- [x] Notification system with real-time dropdown.
+- [x] Enhanced Analytics with visualization components.
+- [x] Mobile-responsive profile enhancements.
