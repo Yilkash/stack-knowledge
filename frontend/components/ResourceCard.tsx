@@ -4,6 +4,9 @@ import TipButton from './TipButton';
 import Link from 'next/link';
 import { formatSTX } from '@/lib/utils';
 import { Resource } from '@/types';
+import { useContract } from '@/hooks/use-contract';
+import { useToast } from '@/hooks/use-toast';
+import { AlertTriangle } from 'lucide-react';
 
 interface ResourceProps {
     resource: Resource;
@@ -18,6 +21,23 @@ interface ResourceProps {
  */
 export default function ResourceCard({ resource }: ResourceProps) {
     const { id, title, description, uploader, totalTips } = resource;
+    const { reportResource, loading } = useContract();
+    const { showToast } = useToast();
+
+    const handleReport = async (e: React.MouseEvent) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        const reason = window.prompt("Reason for reporting this resource:");
+        if (!reason) return;
+
+        try {
+            await reportResource(id, reason);
+            showToast("Report submitted successfully.", "success");
+        } catch (err) {
+            showToast(err instanceof Error ? err.message : "Failed to submit report", "error");
+        }
+    };
 
     return (
         <Card className="flex flex-col p-8 glass rounded-3xl border border-white/5 hover:border-primary/30 transition-all hover:scale-[1.03] hover:shadow-[0_20px_50px_rgba(14,165,233,0.1)] h-full group relative overflow-hidden">
@@ -40,6 +60,14 @@ export default function ResourceCard({ resource }: ResourceProps) {
                     <p className="text-xs text-muted-foreground font-bold uppercase tracking-tighter">
                         BY <span className="text-foreground">{uploader.slice(0, 6)}...{uploader.slice(-4)}</span>
                     </p>
+                    <button
+                        onClick={handleReport}
+                        disabled={loading}
+                        className="ml-auto text-zinc-400 hover:text-red-500 transition-colors"
+                        title="Report this resource"
+                    >
+                        <AlertTriangle size={16} />
+                    </button>
                 </div>
             </div>
 
