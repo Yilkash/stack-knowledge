@@ -1,49 +1,55 @@
-# Contributing to StackKnowledge
+# Contributing to StackKnowledge 🎓
 
-Thank you for your interest in contributing! 🎉
+Thank you for your interest in contributing to StackKnowledge! We are building the future of decentralized education on Stacks.
 
-## Development Setup
+## 🚀 Getting Started
 
-1. Fork the repository
-2. Clone your fork: `git clone https://github.com/YOUR_USERNAME/stack-knowledge.git`
-3. Install dependencies: `npm install`
-4. Create a branch: `git checkout -b feature/your-feature`
-5. Make your changes
-6. Run tests: `npm test`
-7. Commit: `git commit -m "feat: your feature"`
-8. Push: `git push origin feature/your-feature`
-9. Open a Pull Request:
-    - Provide a clear and descriptive title.
-    - Reference any related issues (e.g., `Fixes #123`).
-    - Include screenshots for UI changes.
-    - Ensure CI checks pass before requesting review.
+1.  **Fork the repository** on GitHub.
+2.  **Clone your fork** locally:
+    ```bash
+    git clone https://github.com/YOUR_USERNAME/stack-knowledge.git
+    cd stack-knowledge
+    ```
+3.  **Install dependencies**:
+    ```bash
+    npm install
+    ```
+4.  **Create a branch** for your changes:
+    ```bash
+    git checkout -b feature/AmazingFeature
+    ```
 
-## Commit Convention
+## 🛠️ Development Workflow
 
-We follow [Conventional Commits](https://www.conventionalcommits.org/):
+-   **Frontend**: Built with Next.js 15, Tailwind CSS, and Framer Motion.
+-   **Backend**: Stacks smart contracts written in Clarity. Use [Clarinet](https://github.com/hirosystems/clarinet) for testing.
 
-- `feat:` New feature
-- `fix:` Bug fix
-- `docs:` Documentation changes
-- `style:` Code style changes
-- `refactor:` Code refactoring
-- `test:` Test additions/changes
-- `chore:` Build process or auxiliary tool changes
+### Running the App
+```bash
+npm run dev
+```
 
-## Code Style
+### Running Tests
+```bash
+# Frontend Tests
+npm test
 
-- Use TypeScript for type safety
-- Follow ESLint rules
-- Write tests for new features
-- Keep components small and focused
-- Use meaningful variable names
+# Smart Contract Tests
+npm run test:backend
+```
 
-## Testing
+## 📝 Coding Standards
 
-- Unit tests: `npm test`
-- E2E tests: `npm run test:e2e`
-- Coverage: `npm run test:coverage`
+-   **TypeScript**: We use strict TypeScript. Ensure your code passes `npm run type-check`.
+-   **Linting**: We use ESLint and Prettier. Run `npm run lint` before committing.
+-   **Commits**: Use descriptive commit messages (e.g., `feat: add reporting functionality`).
 
-## Questions?
+## 📫 Pull Request Process
 
-Open an issue or reach out to the maintainers.
+1.  Update the documentation if you've added new features.
+2.  Ensure all tests pass.
+3.  Submit a PR with a clear description of the changes.
+
+## 📜 License
+
+By contributing, you agree that your contributions will be licensed under the MIT License.
