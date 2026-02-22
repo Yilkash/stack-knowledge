@@ -1,42 +1,69 @@
+"use client";
+
+import { useState } from 'react';
 import NavBar from '@/components/NavBar';
-import Footer from '@/components/Footer';
+import { Send, Bot, User, Sparkles } from 'lucide-react';
 
-'use client';
-
-/**
- * Intelligent AI Chat interface for resource interrogation and knowledge synthesis.
- */
 export default function ChatPage() {
-    return (
-        <main className="min-h-screen bg-background text-foreground">
-            <NavBar />
+  const [messages, setMessages] = useState([
+    { role: 'assistant', content: 'Hello! I am your Study Buddy. Ask me anything about your uploaded resources!' }
+  ]);
+  const [input, setInput] = useState('');
 
-            <section className="py-40 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto flex flex-col items-center justify-center text-center">
-                <h1 className="text-6xl md:text-8xl font-black uppercase tracking-tighter mb-8 leading-none">
-                    KNOWLEDGE <span className="text-primary italic">SYNTHESIS</span>
-                </h1>
-                <p className="text-xl text-muted-foreground max-w-2xl font-medium italic mb-12">
-                    Harness the power of community-verified intelligence through our advanced AI interrogation protocols.
-                </p>
+  const send = () => {
+    if (!input) return;
+    setMessages([...messages, { role: 'user', content: input }]);
+    setInput('');
+    setTimeout(() => {
+        setMessages(prev => [...prev, { role: 'assistant', content: 'I am analyzing your request based on the peer-reviewed materials available on StackKnowledge...' }]);
+    }, 600);
+  };
 
-                <div className="w-full max-w-4xl glass rounded-[40px] p-12 lg:p-20 border border-white/5 shadow-2xl flex flex-col items-center">
-                    <div className="w-20 h-20 bg-primary/10 rounded-[32px] flex items-center justify-center text-primary text-4xl mb-8 animate-pulse">
-                        🤖
-                    </div>
-                    <h2 className="text-3xl font-black uppercase tracking-tighter mb-4">Neural Interface Initializing</h2>
-                    <p className="text-muted-foreground font-medium uppercase tracking-widest text-xs mb-12">Protocol Version 2.0.4-BETA</p>
+  return (
+    <main className="min-h-screen bg-background">
+      <NavBar />
+      <div className="max-w-4xl mx-auto pt-32 pb-20 px-4 h-screen flex flex-col">
+          <div className="flex items-center gap-3 mb-8">
+              <div className="p-3 bg-primary rounded-2xl shadow-lg shadow-primary/20">
+                  <Bot size={24} className="text-white" />
+              </div>
+              <div>
+                  <h1 className="text-2xl font-black tracking-tighter uppercase">AI Study <span className="text-primary italic">Buddy</span></h1>
+                  <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground flex items-center gap-1">
+                      <Sparkles size={10} className="text-primary" /> Personalized Learning Context Active
+                  </p>
+              </div>
+          </div>
 
-                    <div className="w-full h-2 bg-white/5 rounded-full overflow-hidden mb-12">
-                        <div className="h-full bg-primary w-1/3 animate-progress"></div>
-                    </div>
+          <div className="flex-1 overflow-y-auto space-y-6 mb-8 pr-4 scrollbar-hide">
+              {messages.map((m, i) => (
+                  <div key={i} className={`flex gap-4 ${m.role === 'user' ? 'flex-row-reverse' : ''}`}>
+                      <div className={`w-10 h-10 rounded-2xl flex items-center justify-center shrink-0 ${m.role === 'assistant' ? 'bg-zinc-100 dark:bg-zinc-900 border-2 border-primary/20' : 'bg-primary'}`}>
+                          {m.role === 'assistant' ? <Bot size={18} /> : <User size={18} className="text-white" />}
+                      </div>
+                      <div className={`max-w-[80%] p-4 rounded-3xl text-sm font-medium leading-relaxed ${m.role === 'assistant' ? 'bg-zinc-50 dark:bg-zinc-900/50 text-foreground' : 'bg-primary text-white shadow-xl shadow-primary/10'}`}>
+                          {m.content}
+                      </div>
+                  </div>
+              ))}
+          </div>
 
-                    <button className="px-12 py-5 bg-foreground text-background rounded-[24px] font-black uppercase tracking-[0.2em] shadow-2xl hover:scale-105 transition-all">
-                        Authenticate to Sync
-                    </button>
-                </div>
-            </section>
-
-            <Footer />
-        </main>
-    );
+          <div className="relative">
+              <input 
+                value={input}
+                onChange={e => setInput(e.target.value)}
+                onKeyDown={e => e.key === 'Enter' && send()}
+                placeholder="Ask about Calculus, CS101, or search for resources..."
+                className="w-full bg-zinc-100 dark:bg-zinc-900 border-none rounded-3xl py-6 px-8 text-sm font-bold focus:ring-4 focus:ring-primary/10 transition-all shadow-inner"
+              />
+              <button 
+                onClick={send}
+                className="absolute right-4 top-1/2 -translate-y-1/2 p-3 bg-primary text-white rounded-2xl hover:scale-105 transition-transform"
+              >
+                  <Send size={18} />
+              </button>
+          </div>
+      </div>
+    </main>
+  );
 }
