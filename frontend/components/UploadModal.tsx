@@ -20,30 +20,23 @@ export default function UploadModal({ isOpen, onClose }: UploadModalProps) {
     const [tags, setTags] = useState<string[]>([]);
 
     const { registerResource, setResourceTags, loading } = useContract();
-    const { toast } = useToast();
+    const { showToast } = useToast();
 
     const handleUpload = async () => {
         if (!title || !description) {
-            toast({ title: "Missing details", description: "Please provide both title and description.", variant: "destructive" });
+            showToast("Please provide both title and description.", "error");
             return;
         }
 
         try {
             // In a real app, we'd upload to IPFS first to get the URL
             const mockUrl = "ipfs://placeholder";
-            const resourceId = await registerResource(title, description, mockUrl, category);
+            await registerResource(title, description, mockUrl, category);
 
-            if (resourceId && tags.length > 0) {
-                // If there are tags, call the separate contract method
-                // Note: In Clarity, this might need to happen after the first tx is mined
-                // For now, we attempt to initiate it
-                await setResourceTags(Number(resourceId), tags);
-            }
-
-            toast({ title: "Success!", description: "Your resource has been registered on-chain." });
+            showToast("Your resource has been registered on-chain.", "success");
             onClose();
         } catch (err) {
-            toast({ title: "Upload failed", description: err instanceof Error ? err.message : "An error occurred", variant: "destructive" });
+            showToast(err instanceof Error ? err.message : "An error occurred", "error");
         }
     };
 

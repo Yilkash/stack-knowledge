@@ -150,5 +150,36 @@ export function useContract() {
     }
   };
 
+  /**
+   * Reports a resource for inappropriate content.
+   * 
+   * @param {number} resourceId - Unique ID of the resource
+   * @param {string} reason - Reason for reporting
+   */
+  const reportResource = async (resourceId: number, reason: string) => {
+    setLoading(true);
+    setError(null);
+
+    try {
+      await openContractCall({
+        network,
+        contractAddress: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS!,
+        contractName: process.env.NEXT_PUBLIC_CONTRACT_NAME!,
+        functionName: 'report-resource',
+        functionArgs: [
+          uintCV(resourceId),
+          stringUtf8CV(reason)
+        ],
+        onFinish: (data) => {
+          console.log('Resource reported:', data.txId);
+        },
+      });
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : String(err));
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return { registerResource, tipResource, addReview, setResourceTags, reportResource, loading, error };
 }
