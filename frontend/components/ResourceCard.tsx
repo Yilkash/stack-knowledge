@@ -6,7 +6,8 @@ import { formatSTX } from '@/lib/utils';
 import { Resource } from '@/types';
 import { useContract } from '@/hooks/use-contract';
 import { useToast } from '@/hooks/use-toast';
-import { AlertTriangle } from 'lucide-react';
+import { useStacksAuth } from '@/hooks/use-stacks-auth';
+import { AlertTriangle, Archive } from 'lucide-react';
 
 interface ResourceProps {
     resource: Resource;
@@ -21,8 +22,12 @@ interface ResourceProps {
  */
 export default function ResourceCard({ resource }: ResourceProps) {
     const { id, title, description, uploader, totalTips } = resource;
-    const { reportResource, loading } = useContract();
+    const { reportResource, archiveResource, loading } = useContract();
     const { showToast } = useToast();
+    const { userData } = useStacksAuth();
+
+    const isOwner = userData?.profile?.stxAddress?.testnet === uploader ||
+        userData?.profile?.stxAddress?.mainnet === uploader;
 
     const handleReport = async (e: React.MouseEvent) => {
         e.preventDefault();
@@ -36,6 +41,20 @@ export default function ResourceCard({ resource }: ResourceProps) {
             showToast("Report submitted successfully.", "success");
         } catch (err) {
             showToast(err instanceof Error ? err.message : "Failed to submit report", "error");
+        }
+    };
+
+    const handleArchive = async (e: React.MouseEvent) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        if (!window.confirm("Are you sure you want to archive this resource? it will be hidden from the feed.")) return;
+
+        try {
+            await archiveResource(id);
+            showToast("Resource archived successfully.", "success");
+        } catch (err) {
+            showToast(err instanceof Error ? err.message : "Failed to archive resource", "error");
         }
     };
 
@@ -60,14 +79,28 @@ export default function ResourceCard({ resource }: ResourceProps) {
                     <p className="text-xs text-muted-foreground font-bold uppercase tracking-tighter">
                         BY <span className="text-foreground">{uploader.slice(0, 6)}...{uploader.slice(-4)}</span>
                     </p>
-                    <button
-                        onClick={handleReport}
-                        disabled={loading}
-                        className="ml-auto text-zinc-400 hover:text-red-500 transition-colors"
-                        title="Report this resource"
-                    >
-                        <AlertTriangle size={16} />
-                    </button>
+                    <div className="flex gap-2 ml-auto">
+                        {!isOwner && (
+                            <button
+                                onClick={handleReport}
+                                disabled={loading}
+                                className="text-zinc-400 hover:text-red-500 transition-colors"
+                                title="Report this resource"
+                            >
+                                <AlertTriangle size={16} />
+                            </button>
+                        )}
+                        {isOwner && (
+                            <button
+                                onClick={handleArchive}
+                                disabled={loading}
+                                className="text-zinc-400 hover:text-orange-500 transition-colors"
+                                title="Archive this resource"
+                            >
+                                <Archive size={16} />
+                            </button>
+                        )}
+                    </div>
                 </div>
             </div>
 

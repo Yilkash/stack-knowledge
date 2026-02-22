@@ -181,5 +181,33 @@ export function useContract() {
     }
   };
 
-  return { registerResource, tipResource, addReview, setResourceTags, reportResource, loading, error };
+  /**
+   * Archives a resource, making it inactive.
+   * Only the owner can archive their resource.
+   * 
+   * @param {number} resourceId - Unique ID of the resource
+   */
+  const archiveResource = async (resourceId: number) => {
+    setLoading(true);
+    setError(null);
+
+    try {
+      await openContractCall({
+        network,
+        contractAddress: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS!,
+        contractName: process.env.NEXT_PUBLIC_CONTRACT_NAME!,
+        functionName: 'archive-resource',
+        functionArgs: [uintCV(resourceId)],
+        onFinish: (data) => {
+          console.log('Resource archived:', data.txId);
+        },
+      });
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : String(err));
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return { registerResource, tipResource, addReview, setResourceTags, reportResource, archiveResource, loading, error };
 }
