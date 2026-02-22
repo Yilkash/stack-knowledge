@@ -1,48 +1,19 @@
-import { cn } from '@/lib/utils';
-
-/**
- * Reusable Badge component for displaying tags, categories, or status indicators.
- * Supports multiple style variants including filled and outline.
- */
-interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
+interface BadgeProps {
   children: React.ReactNode;
-  variant?: 'default' | 'success' | 'warning' | 'error' | 'info' | 'outline';
-  size?: 'sm' | 'md' | 'lg';
-  className?: string;
+  variant?: 'default' | 'success' | 'warning' | 'error' | 'outline';
 }
 
-export default function Badge({
-  children,
-  variant = 'default',
-  size = 'md',
-  className,
-  ...props
-}: BadgeProps) {
-  const variants = {
-    default: 'bg-zinc-900 text-zinc-100 border-zinc-800',
-    success: 'bg-green-500/10 text-green-500 border-green-500/20',
-    warning: 'bg-amber-500/10 text-amber-500 border-amber-500/20',
-    error: 'bg-red-500/10 text-red-500 border-red-500/20',
-    info: 'bg-primary/10 text-primary border-primary/20',
-    outline: 'bg-transparent text-muted-foreground border-white/10'
-  };
-
-  const sizes = {
-    sm: 'px-3 py-1 text-[10px] uppercase font-black tracking-widest',
-    md: 'px-4 py-1.5 text-xs uppercase font-black tracking-widest',
-    lg: 'px-5 py-2 text-sm uppercase font-black tracking-widest'
+export default function Badge({ children, variant = 'default' }: BadgeProps) {
+  const styles = {
+    default: 'bg-zinc-100 text-zinc-800 dark:bg-zinc-800 dark:text-zinc-200',
+    success: 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400',
+    warning: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400',
+    error: 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400',
+    outline: 'border border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400'
   };
 
   return (
-    <span
-      className={cn(
-        "inline-flex items-center rounded-full font-medium border transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
-        variants[variant],
-        sizes[size],
-        className
-      )}
-      {...props}
-    >
+    <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold ${styles[variant]}`}>
       {children}
     </span>
   );
