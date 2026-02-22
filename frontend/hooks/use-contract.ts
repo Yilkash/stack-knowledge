@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { openContractCall } from '@stacks/connect';
-import { uintCV, stringUtf8CV } from '@stacks/transactions';
+import { uintCV, stringUtf8CV, listCV } from '@stacks/transactions';
 import { network } from '@/lib/stacks';
 
 /**
@@ -119,5 +119,36 @@ export function useContract() {
     }
   };
 
-  return { registerResource, tipResource, addReview, loading, error };
+  /**
+   * Sets tags for a specific resource.
+   * 
+   * @param {number} resourceId - Unique ID of the resource
+   * @param {string[]} tags - List of up to 10 tags
+   */
+  const setResourceTags = async (resourceId: number, tags: string[]) => {
+    setLoading(true);
+    setError(null);
+
+    try {
+      await openContractCall({
+        network,
+        contractAddress: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS!,
+        contractName: process.env.NEXT_PUBLIC_CONTRACT_NAME!,
+        functionName: 'set-resource-tags',
+        functionArgs: [
+          uintCV(resourceId),
+          listCV(tags.map(tag => stringUtf8CV(tag)))
+        ],
+        onFinish: (data) => {
+          console.log('Tags set:', data.txId);
+        },
+      });
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : String(err));
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return { registerResource, tipResource, addReview, setResourceTags, loading, error };
 }
