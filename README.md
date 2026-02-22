@@ -92,12 +92,27 @@ graph TD
 | **Icons** | **Lucide React** | Clean and consistent SVG icon set. |
 | **Integration** | **Stacks.js** | Wallet connection (`@stacks/connect`) and transaction handling. |
 | **Language** | **TypeScript** | Type-safe development for both frontend and testing. |
+| **AI Layer** | **OpenAI API** | Powering the AI Study Buddy with RAG capabilities. |
 
 ### Technical Highlights
 - **App Router Architecture**: Leveraging Next.js 15's parallel and intercepted routes for a seamless UX.
 - **State Management**: Using custom React hooks for wallet state and document context without overhead.
 - **Smart Contract Security**: Post-conditions implemented for all STX transfers to ensure user safety.
 - **RAG Engine**: Integrated with OpenAI's latest models for highly accurate, document-based responses.
+- **Decentralized Storage**: Gaia hub integration for hosting educational resources.
+
+---
+
+## 🗺️ Project Roadmap
+
+We are currently in a multi-phase enhancement period:
+
+1.  **Phase 1: Documentation & Standards** - Base refinement.
+2.  **Phase 2: Smart Contract Integration** - Advanced feature hookups.
+3.  **Phase 3: Social & engagement** - User interaction layers.
+4.  **Phase 4: AI & Quality** - Intelligence layer refinement.
+
+See [FEATURE_ROADMAP.md](./docs/FEATURE_ROADMAP.md) for full details.
 
 ## 📖 Documentation
 
