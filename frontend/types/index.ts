@@ -90,3 +90,13 @@ export interface ApiResponse<T = any> {
   error?: string;
   message?: string;
 }
+
+export interface Collection {
+  id: string;
+  name: string;
+  description: string;
+  owner: string;
+  resourceIds: number[];
+  isPublic: boolean;
+  createdAt: number;
+}
