@@ -150,5 +150,5 @@ export function useContract() {
     }
   };
 
-  return { registerResource, tipResource, addReview, setResourceTags, loading, error };
+  return { registerResource, tipResource, addReview, setResourceTags, reportResource, loading, error };
 }
