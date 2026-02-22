@@ -10,6 +10,11 @@ import Container from './Container';
 import Logo from './Logo';
 import { cn } from '@/lib/utils';
 
+/**
+ * Main navigation bar component with mobile responsiveness and theme toggling.
+ * 
+ * @returns {JSX.Element} The NavBar component
+ */
 export default function NavBar() {
     const pathname = usePathname();
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
