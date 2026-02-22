@@ -1,3 +1,7 @@
+/**
+ * Authentication management for Stacks.
+ * @module hooks/use-stacks-auth
+ */
 import { useEffect, useState } from 'react';
 import { userSession, authenticate } from '@/lib/stacks';
 import { UserData } from '@stacks/connect';
