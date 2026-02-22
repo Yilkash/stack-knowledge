@@ -1,3 +1,7 @@
+/**
+ * Common utility functions for formatting and validation.
+ * @module lib/utils
+ */
 import { type ClassValue, clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
 
