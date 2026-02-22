@@ -2,28 +2,29 @@
 
 ## Supported Versions
 
-Users of this dApp should always use the latest version available on the `main` branch.
+Only the latest version of StackKnowledge is supported for security updates.
 
 | Version | Supported          |
 | ------- | ------------------ |
-| 1.0.x   | :white_check_mark: |
-| < 1.0   | :x:                |
+| v1.x    | ✅                  |
+| < v1.x  | ❌                  |
 
 ## Reporting a Vulnerability
 
-We take the security of StackKnowledge seriously. If you believe you have found a security vulnerability, please report it to us responsibly.
+We take the security of StackKnowledge seriously. If you believe you have found a security vulnerability, please report it to us by emailing security@stackknowledge.org.
 
-**Please do not report security vulnerabilities through public GitHub issues.**
+**Please do not report security vulnerabilities via public GitHub issues.**
 
-Instead, please send an email to security@stackknowledge.org (hypothetical) or contact the project maintainers directly.
+In your report, please include:
 
-### Our Response Process
+-   A description of the vulnerability.
+-   The steps to reproduce the vulnerability.
+-   Your contact information for follow-up.
 
-1.  **Acknowledgment**: We will acknowledge receipt of your report within 48 hours.
-2.  **Investigation**: We will investigate the issue and determine its severity.
-3.  **Resolution**: We will work on a fix and release it as soon as possible.
-4.  **Disclosure**: Once the fix is released, we will publicly disclose the vulnerability with credit to the reporter.
+We will acknowledge receipt of your report and provide a timeline for addressing the issue.
 
-## Safe Harbor
+## Disclosure Policy
 
-We promise not to bring legal action against researchers who report vulnerabilities in accordance with this policy.
+We follow a responsible disclosure policy. We ask that you do not disclose the vulnerability publicly until we have had a reasonable amount of time to address it and release a fix.
+
+Thank you for helping keep StackKnowledge secure!
