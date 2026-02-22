@@ -5,9 +5,47 @@ import Hero from '@/components/Hero';
 import SearchBar from '@/components/SearchBar';
 import ActivityFeed from '@/components/ActivityFeed';
 import FeatureCard from '@/components/FeatureCard';
+import FeaturedResources from '@/components/FeaturedResources';
 import Footer from '@/components/Footer';
 import { ShieldCheck, Bot, Coins } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { Resource } from '@/types';
+
+const FEATURED_RESOURCES: Resource[] = [
+  {
+    id: 1,
+    title: "Introduction to Computer Science 101 - Lecture Notes",
+    description: "Comprehensive notes covering binary, logic gates, and basic algorithms. Perfect for mid-term preparation.",
+    uploader: "SP3X...A1B2",
+    url: "ipfs://mock1",
+    totalTips: 450,
+    createdAt: Date.now(),
+    category: "Computer Science",
+    tags: ["CS101", "Notes", "Logic Gates"]
+  },
+  {
+    id: 2,
+    title: "Organic Chemistry II - Midterm Handbook",
+    description: "Reaction mechanisms, stereochemistry, and spectroscopy summaries for Chm202 students.",
+    uploader: "SP1K...Z9Y8",
+    url: "ipfs://mock2",
+    totalTips: 280,
+    createdAt: Date.now(),
+    category: "Chemistry",
+    tags: ["Organic", "Chemistry", "Study Guide"]
+  },
+  {
+    id: 3,
+    title: "Macroeconomics Principles - Past Question Pack",
+    description: "Verified past questions from 2020-2024 with detailed solution keys and model answers.",
+    uploader: "SP2M...X3W2",
+    url: "ipfs://mock3",
+    totalTips: 620,
+    createdAt: Date.now(),
+    category: "Economics",
+    tags: ["Macro", "Economics", "Exam Prep"]
+  }
+];
 
 export default function Home() {
   return (
@@ -72,11 +110,13 @@ export default function Home() {
             </motion.div>
           </div>
 
+          <FeaturedResources resources={FEATURED_RESOURCES} />
+
           <ActivityFeed />
         </div>
       </section>
 
       <Footer />
-    </main>
+    </main >
   );
 }
