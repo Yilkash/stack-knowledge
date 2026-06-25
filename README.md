@@ -207,3 +207,4 @@ Built on Stacks - The Bitcoin Layer 2 for smart contracts/* June 23 Polish Pass 
 /* June 25 Polish Pass 3 */
 /* June 25 Polish Pass 4 */
 /* June 25 Polish Pass 6 */
+/* June 25 Polish Pass 8 */
